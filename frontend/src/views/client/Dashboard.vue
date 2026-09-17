@@ -191,13 +191,14 @@ const loadData = async () => {
 
     const billRes = await request.get('/repayment/my-plans')
     if (billRes.code === 200) {
-      billPlans.value = billRes.data || []
+      billPlans.value = billRes.data?.list || billRes.data || []
     }
 
     nextTick(() => {
       initCharts()
     })
   } catch (e) {
+    console.error('加载数据失败:', e)
   } finally {
     loading.value = false
   }
@@ -456,6 +457,21 @@ onMounted(() => {
   color: var(--text-secondary);
   font-size: 13px;
   margin: 0;
+}
+
+.profile-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.profile-badge :deep(.el-tag) {
+  height: 22px;
+  line-height: 22px;
+  padding: 0 8px;
+  font-size: 12px;
 }
 
 .stat-cards {

@@ -114,6 +114,9 @@
             <span v-if="unreadCount > 0" class="menu-count danger">{{ unreadCount }}</span>
           </el-menu-item>
         </el-menu>
+        <div class="drawer-footer">
+          <ThemeToggle />
+        </div>
       </el-drawer>
 
       <el-main class="content-area">

@@ -186,6 +186,15 @@
   padding: 0 12px;
 }
 
+/* 移动端抽屉底部 */
+.drawer-footer {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  border-top: 1px solid var(--border-default, #e2e8f0);
+  margin-top: auto;
+}
+
 /* 右上角用户名按钮 */
 .username-btn {
   display: inline-flex;

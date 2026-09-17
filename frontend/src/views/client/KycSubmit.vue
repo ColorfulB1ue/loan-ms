@@ -333,39 +333,39 @@ onMounted(() => loadData())
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 120px);
-    padding: 30px;
+    padding: var(--space-6, 30px);
 }
 
 .kyc-card {
     width: 100%;
     max-width: 800px;
-    background: rgba(30, 41, 59, 0.7);
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    border-radius: 16px;
-    padding: 20px;
-    color: #fff;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-xl, 16px);
+    padding: var(--space-5, 20px);
+    color: var(--text-primary);
 }
-.card-header { text-align: center; margin-bottom: 30px; }
-.card-header h2 { font-size: 26px; color: #fff; margin-bottom: 8px;}
-.card-header p { color: var(--text-muted, #94a3b8); font-size: 14px;}
+.card-header { text-align: center; margin-bottom: var(--space-6, 30px); }
+.card-header h2 { font-size: var(--font-size-2xl, 26px); color: var(--text-primary); margin-bottom: var(--space-2, 8px);}
+.card-header p { color: var(--text-muted); font-size: var(--font-size-sm, 14px);}
 
 .result-box {
-    text-align: center; padding: 40px 0; color: #fff;
+    text-align: center; padding: var(--space-10, 40px) 0; color: var(--text-primary);
 }
-.result-box .icon { font-size: 60px; margin-bottom: 20px; }
-.warning-icon { color: var(--color-warning, #e6a23c); }
-.success-icon { color: var(--color-success, #67c23a); }
-.danger-icon { color: var(--color-danger, #f56c6c); }
+.result-box .icon { font-size: 60px; margin-bottom: var(--space-5, 20px); }
+.warning-icon { color: var(--color-warning); }
+.success-icon { color: var(--color-success); }
+.danger-icon { color: var(--color-danger); }
 
-:deep(.el-form-item__label) { color: var(--text-secondary, #cbd5e0) !important; font-weight: bold;}
-:deep(.el-input__wrapper), :deep(.el-select__wrapper) { background: rgba(0,0,0,0.3) !important; box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset !important; }
-:deep(.el-input__inner) { color: #fff !important; }
-:deep(.el-select__input) { color: #fff !important; }
-:deep(.el-select__selected-item) { color: #fff !important; }
-:deep(.el-select__selected-item.is-transparent) { color: var(--el-text-color-placeholder) !important; }
+:deep(.el-form-item__label) { color: var(--text-secondary) !important; font-weight: var(--font-weight-bold, 700);}
+:deep(.el-input__wrapper), :deep(.el-select__wrapper) { background: var(--bg-secondary) !important; box-shadow: 0 0 0 1px var(--border-default) inset !important; }
+:deep(.el-input__inner) { color: var(--text-primary) !important; }
+:deep(.el-select__input) { color: var(--text-primary) !important; }
+:deep(.el-select__selected-item) { color: var(--text-primary) !important; }
+:deep(.el-select__selected-item.is-transparent) { color: var(--text-muted) !important; }
 
-.submit-btn { width: 100%; margin-top: 20px; font-weight: bold; border-radius: 8px; }
+.submit-btn { width: 100%; margin-top: var(--space-5, 20px); font-weight: var(--font-weight-bold, 700); border-radius: var(--radius-lg, 8px); }
 
 /* 图像上传组件样式重塑 */
 .avatar-uploader {

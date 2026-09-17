@@ -78,7 +78,9 @@ const loadPlans = async () => {
     loading.value = true
     try {
         const res = await request.get('/repayment/my-plans')
-        plans.value = res.data || []
+        plans.value = res.data?.list || res.data || []
+    } catch (e) {
+        console.error('加载账单失败:', e)
     } finally {
         loading.value = false
     }

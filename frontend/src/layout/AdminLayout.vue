@@ -122,6 +122,9 @@
             <span>贷款产品</span>
           </el-menu-item>
         </el-menu>
+        <div class="drawer-footer">
+          <ThemeToggle />
+        </div>
       </el-drawer>
 
       <el-main class="content-area">

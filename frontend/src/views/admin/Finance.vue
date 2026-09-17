@@ -11,7 +11,7 @@
         <el-table :data="pagedPlans" style="width: 100%" class="custom-table admin-table" v-loading="loadingPlans">
           <el-table-column prop="id" label="计划ID" min-width="80" />
           <el-table-column prop="loanId" label="贷款ID" min-width="80" />
-          <el-table-column prop="remark" label="客户姓名" min-width="120" />
+          <el-table-column prop="username" label="客户姓名" min-width="120" />
           <el-table-column label="期次" min-width="80">
             <template #default="scope">第 {{ scope.row.termIndex }} 期</template>
           </el-table-column>
