@@ -223,3 +223,75 @@ REPLACE INTO `repayment_plan` (`loan_id`, `user_id`, `term_index`, `principal`, 
 (1, 2, 1, 3319.46, 40.00, 0, 3359.46, '2026-05-15', 0),
 (1, 2, 2, 3333.58, 25.88, 0, 3359.46, '2026-06-15', 0),
 (1, 2, 3, 3346.96, 12.50, 0, 3359.46, '2026-07-15', 0);
+
+-- -----------------------------------------------------
+-- 10. 性能优化索引
+-- -----------------------------------------------------
+
+-- 还款计划表：逾期扫描查询优化（status + due_date 联合索引）
+ALTER TABLE `repayment_plan` ADD INDEX `idx_status_due_date` (`status`, `due_date`);
+
+-- 还款计划表：用户维度查询优化
+ALTER TABLE `repayment_plan` ADD INDEX `idx_user_status` (`user_id`, `status`);
+
+-- 贷款申请表：待审批查询优化（status + apply_time 联合索引）
+ALTER TABLE `loan_application` ADD INDEX `idx_status_apply_time` (`status`, `apply_time`);
+
+-- 贷款申请表：用户贷款列表查询优化
+ALTER TABLE `loan_application` ADD INDEX `idx_user_status` (`user_id`, `status`);
+
+-- 还款记录表：用户维度查询优化
+ALTER TABLE `repayment_record` ADD INDEX `idx_user_id` (`user_id`);
+
+-- 催收记录表：贷款维度查询优化
+ALTER TABLE `collection_record` ADD INDEX `idx_loan_id` (`loan_id`);
+
+-- 贷款产品表：状态筛选优化
+ALTER TABLE `loan_product` ADD INDEX `idx_status` (`status`);
+
+-- 系统消息表：用户未读消息查询优化
+ALTER TABLE `sys_message` ADD INDEX `idx_user_read` (`to_user_id`, `is_read`);
+
+-- 额度申请表：用户待审申请查询优化
+ALTER TABLE `credit_application` ADD INDEX `idx_user_status` (`user_id`, `status`);
+
+-- 解冻申请表：用户待审申请查询优化
+ALTER TABLE `unfreeze_application` ADD INDEX `idx_user_status` (`user_id`, `status`);
+
+-- -----------------------------------------------------
+-- 11. 风险评估记录表
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `risk_assessment` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT NOT NULL COMMENT '用户ID',
+  `loan_id` BIGINT DEFAULT NULL COMMENT '关联贷款申请ID',
+  `credit_score` INT NOT NULL COMMENT '信用评分(300-950)',
+  `credit_level` VARCHAR(10) NOT NULL COMMENT '信用等级(AAA/B/CC/C)',
+  `risk_level` VARCHAR(20) NOT NULL COMMENT '风险等级(LOW/MEDIUM/HIGH/REJECT)',
+  `risk_reasons` TEXT COMMENT '风险原因(JSON数组)',
+  `auto_approved` TINYINT(1) DEFAULT 0 COMMENT '是否自动审批通过',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_loan_id` (`loan_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='风险评估记录表';
+
+-- -----------------------------------------------------
+-- 12. 审计日志表
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `audit_log` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT DEFAULT NULL COMMENT '操作用户ID',
+  `username` VARCHAR(50) DEFAULT NULL COMMENT '操作用户名',
+  `action` VARCHAR(50) NOT NULL COMMENT '操作类型',
+  `module` VARCHAR(50) DEFAULT NULL COMMENT '模块名称',
+  `target_id` VARCHAR(50) DEFAULT NULL COMMENT '目标ID',
+  `target_type` VARCHAR(50) DEFAULT NULL COMMENT '目标类型',
+  `detail` TEXT COMMENT '操作详情',
+  `ip` VARCHAR(50) DEFAULT NULL COMMENT 'IP地址',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_action` (`action`),
+  KEY `idx_create_time` (`create_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='操作审计日志表';
