@@ -1,0 +1,352 @@
+/* ============================================
+ * Loan-MS 公共样式
+ * 统一全站样式，消除重复CSS
+ * 金融产品配色：专业、可信赖
+ * ============================================ */
+
+/* CSS变量 - 与style.css保持一致 */
+:root {
+  --primary-color: #2563eb;
+  --primary-light: #dbeafe;
+  --success-color: #16a34a;
+  --warning-color: #d97706;
+  --danger-color: #dc2626;
+  --info-color: #0891b2;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --bg-primary: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-hover: #f1f5f9;
+
+  --border-color: #e2e8f0;
+  --border-light: #f1f5f9;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+/* ============================================
+ * 表格样式
+ * ============================================ */
+.admin-table {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.admin-table th.el-table__cell {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.admin-table td.el-table__cell {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* 斑马纹表格 */
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+  background: var(--bg-primary);
+}
+
+/* ============================================
+ * 分页样式
+ * ============================================ */
+.pagination-wrap {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 0;
+}
+
+/* ============================================
+ * 页面头部样式
+ * ============================================ */
+.page-header {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ============================================
+ * 卡片样式
+ * ============================================ */
+.content-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+}
+
+.content-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* 统计卡片 */
+.stat-card {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  color: white;
+}
+
+.stat-card .stat-value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.stat-card .stat-label {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+/* ============================================
+ * 表单样式
+ * ============================================ */
+.search-form {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+}
+
+/* ============================================
+ * 按钮样式
+ * ============================================ */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+ * 空状态
+ * ============================================ */
+.empty-state {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--text-muted);
+}
+
+.empty-state .el-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+/* ============================================
+ * 标签样式
+ * ============================================ */
+.status-tag {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* ============================================
+ * 菜单徽章
+ * ============================================ */
+.menu-badge {
+  margin-left: auto;
+}
+
+.menu-badge .el-badge__content {
+  font-size: 10px;
+  height: 16px;
+  line-height: 16px;
+  padding: 0 4px;
+}
+
+.menu-badge.warning .el-badge__content {
+  background-color: var(--warning-color);
+}
+
+.menu-badge.danger .el-badge__content {
+  background-color: var(--danger-color);
+}
+
+/* ============================================
+ * 动画
+ * ============================================ */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-enter-from {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.slide-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+/* ============================================
+ * 响应式
+ * ============================================ */
+
+/* 平板端 */
+@media (max-width: 1024px) {
+  .stat-card .stat-value {
+    font-size: 24px;
+  }
+}
+
+/* 移动端 */
+@media (max-width: 767px) {
+  .page-header {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .page-title {
+    font-size: 18px;
+  }
+
+  .search-form {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .content-card {
+    padding: 12px;
+    border-radius: var(--radius-md);
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .action-buttons .el-button {
+    width: 100%;
+  }
+
+  .stat-card {
+    margin-bottom: 12px;
+  }
+
+  .stat-card .stat-value {
+    font-size: 20px;
+  }
+
+  .stat-card .stat-label {
+    font-size: 12px;
+  }
+
+  /* 表格响应式 */
+  .el-table {
+    font-size: 12px;
+  }
+
+  .el-table th.el-table__cell {
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+
+  .el-table td.el-table__cell {
+    padding: 8px 4px;
+  }
+
+  /* 表单响应式 */
+  .el-form-item {
+    margin-bottom: 16px;
+  }
+
+  .el-form-item__label {
+    font-size: 13px;
+  }
+
+  /* 弹窗响应式 */
+  .el-dialog {
+    width: 90% !important;
+    margin: 0 auto;
+  }
+
+  /* 分页响应式 */
+  .pagination-wrap {
+    padding: 12px 0;
+  }
+
+  .el-pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* 按钮响应式 */
+  .el-button {
+    font-size: 13px;
+  }
+
+  /* 标签响应式 */
+  .el-tag {
+    font-size: 11px;
+  }
+}
+
+/* 超小屏幕 */
+@media (max-width: 480px) {
+  .page-header {
+    padding: 12px;
+  }
+
+  .page-title {
+    font-size: 16px;
+  }
+
+  .stat-card .stat-value {
+    font-size: 18px;
+  }
+}
+
+/* ============================================
+ * 打印样式
+ * ============================================ */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .page-break {
+    page-break-after: always;
+  }
+}
