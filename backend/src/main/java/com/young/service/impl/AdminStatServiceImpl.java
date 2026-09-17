@@ -50,10 +50,11 @@ public class AdminStatServiceImpl implements AdminStatService {
     public Map<String, Object> getBadges() {
         Map<String, Object> badges = new HashMap<>();
 
-        badges.put("kyc", userProfileMapper.selectPendingList().size());
+        // 使用COUNT查询替代全量加载后取size，提升性能
+        badges.put("kyc", userProfileMapper.countPending());
 
         int loanCount = loanMapper.countPending();
-        int creditCount = creditApplicationMapper.selectPendingList().size();
+        int creditCount = creditApplicationMapper.countPending();
         int unfreezeCount = unfreezeApplicationMapper.countPending();
 
         badges.put("loan", loanCount);

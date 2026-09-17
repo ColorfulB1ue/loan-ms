@@ -5,6 +5,7 @@ import com.young.pojo.SysMessage;
 import com.young.service.SysMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,11 +29,13 @@ public class SysMessageServiceImpl implements SysMessageService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void markRead(Long id, Long userId) {
         messageMapper.markRead(id, userId);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void markAllRead(Long userId) {
         messageMapper.markAllRead(userId);
     }

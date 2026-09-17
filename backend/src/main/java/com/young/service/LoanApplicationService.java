@@ -1,6 +1,9 @@
 package com.young.service;
 
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.pojo.LoanApplication;
+
 import java.util.List;
 
 public interface LoanApplicationService {
@@ -21,12 +24,17 @@ public interface LoanApplicationService {
     void rejectLoan(Long applicationId);
 
     /**
-     * 分主角查询贷款清单 (userId为空则查全部)
+     * 分页查询贷款清单 (userId为空则查全部)
      */
-    List<LoanApplication> getApplicationList(Long userId);
+    PageResult<LoanApplication> getApplicationList(Long userId, PageQuery pageQuery);
 
     /**
-     * 查询全部待审批贷款申请（管理端）
+     * 查询全部待审批贷款申请（管理端，分页）
      */
-    List<LoanApplication> getPendingList();
+    PageResult<LoanApplication> getPendingList(PageQuery pageQuery);
+
+    /**
+     * 查询贷款清单（不分页，用于内部逻辑）
+     */
+    List<LoanApplication> getApplicationList(Long userId);
 }

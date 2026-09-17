@@ -1,6 +1,10 @@
 package com.young.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.young.common.BusinessException;
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.mapper.UserProfileMapper;
 import com.young.pojo.UserProfile;
 import com.young.service.UserProfileService;
@@ -8,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -21,6 +26,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     private UserProfileMapper profileMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void submitKyc(UserProfile data) {
         if (containsMask(data.getIdCard()) || containsMask(data.getBankCard()) || containsMask(data.getPhone())) {
             throw new BusinessException("请填写完整、真实的证件与联系信息");
@@ -58,6 +64,22 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
+    public PageResult<UserProfile> getPendingKycList(PageQuery pageQuery) {
+        PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
+        List<UserProfile> list = profileMapper.selectPendingList();
+        PageInfo<UserProfile> pageInfo = new PageInfo<>(list);
+        return PageResult.of(pageInfo);
+    }
+
+    @Override
+    public PageResult<UserProfile> getAllProfileList(PageQuery pageQuery) {
+        PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
+        List<UserProfile> list = profileMapper.selectAllList();
+        PageInfo<UserProfile> pageInfo = new PageInfo<>(list);
+        return PageResult.of(pageInfo);
+    }
+
+    @Override
     public List<UserProfile> getPendingKycList() {
         // 管理员审批需要查看完整资料，后端不脱敏，由前端控制展示粒度
         return profileMapper.selectPendingList();
@@ -69,6 +91,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void auditKyc(Long adminId, Long profileId, boolean isPass) {
         UserProfile p = profileMapper.selectById(profileId);
         if (p == null || p.getStatus() != 0) {

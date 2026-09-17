@@ -1,6 +1,10 @@
 package com.young.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.young.common.BusinessException;
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.mapper.RepaymentPlanMapper;
 import com.young.mapper.RepaymentRecordMapper;
 import com.young.mapper.UserCreditMapper;
@@ -30,6 +34,14 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
     private LoanApplicationMapper loanApplicationMapper;
 
     @Override
+    public PageResult<RepaymentPlan> getUserPlans(Long userId, Integer status, PageQuery pageQuery) {
+        PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
+        List<RepaymentPlan> list = planMapper.selectByUserId(userId, status);
+        PageInfo<RepaymentPlan> pageInfo = new PageInfo<>(list);
+        return PageResult.of(pageInfo);
+    }
+
+    @Override
     public List<RepaymentPlan> getUserPlans(Long userId, Integer status) {
         return planMapper.selectByUserId(userId, status);
     }
@@ -46,13 +58,23 @@ public class RepaymentPlanServiceImpl implements RepaymentPlanService {
             throw new BusinessException("此账单已处于结清状态，严禁重复还款！");
         }
 
+        // 校验支付金额
+        if (payAmount == null || payAmount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new BusinessException("支付金额必须大于0");
+        }
+        // 允许支付金额 >= 应还金额（多付不退，但记录实际支付金额）
+        if (payAmount.compareTo(target.getTotalAmount()) < 0) {
+            throw new BusinessException("支付金额不足，应还金额为：" + target.getTotalAmount());
+        }
+
         // 原子结清：并发下仅有一个请求能成功
         int affected = planMapper.settlePlan(planId);
         if (affected == 0) {
             throw new BusinessException("账单状态已变化，请刷新后重试");
         }
 
-        BigDecimal actualPayAmount = target.getTotalAmount();
+        // 使用实际支付金额记录流水
+        BigDecimal actualPayAmount = payAmount;
         int originalStatus = target.getStatus();
 
         // 生成还款流水

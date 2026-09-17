@@ -5,6 +5,7 @@ import com.young.pojo.LoanProduct;
 import com.young.service.LoanProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class LoanProductServiceImpl implements LoanProductService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void addProduct(LoanProduct product) {
         // 新建时默认下架，由管理员手动上架
         product.setStatus(0);
@@ -35,11 +37,13 @@ public class LoanProductServiceImpl implements LoanProductService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateProduct(LoanProduct product) {
         productMapper.update(product);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void toggleStatus(Long id) {
         LoanProduct product = productMapper.selectById(id);
         if (product == null) return;

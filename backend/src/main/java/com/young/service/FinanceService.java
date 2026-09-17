@@ -1,5 +1,7 @@
 package com.young.service;
 
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.pojo.RepaymentPlan;
 import com.young.pojo.RepaymentRecord;
 
@@ -10,10 +12,16 @@ import java.util.List;
  */
 public interface FinanceService {
 
-    /** 查询全平台所有还款计划 */
+    /** 查询全平台所有还款计划（分页） */
+    PageResult<RepaymentPlan> getAllPlans(PageQuery pageQuery);
+
+    /** 查询全平台所有历史入账明细（分页） */
+    PageResult<RepaymentRecord> getAllRecords(PageQuery pageQuery);
+
+    /** 查询全平台所有还款计划（不分页） */
     List<RepaymentPlan> getAllPlans();
 
-    /** 查询全平台所有历史入账明细 */
+    /** 查询全平台所有历史入账明细（不分页） */
     List<RepaymentRecord> getAllRecords();
 
     /** 手动触发逾期清算任务 */

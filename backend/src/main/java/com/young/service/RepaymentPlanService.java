@@ -1,5 +1,7 @@
 package com.young.service;
 
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.pojo.RepaymentPlan;
 
 import java.math.BigDecimal;
@@ -8,7 +10,12 @@ import java.util.List;
 public interface RepaymentPlanService {
 
     /**
-     * 客户查询自己的账单计划
+     * 客户查询自己的账单计划（分页）
+     */
+    PageResult<RepaymentPlan> getUserPlans(Long userId, Integer status, PageQuery pageQuery);
+
+    /**
+     * 客户查询自己的账单计划（不分页）
      */
     List<RepaymentPlan> getUserPlans(Long userId, Integer status);
 

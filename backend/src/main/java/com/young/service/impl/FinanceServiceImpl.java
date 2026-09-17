@@ -1,5 +1,9 @@
 package com.young.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.mapper.RepaymentPlanMapper;
 import com.young.mapper.RepaymentRecordMapper;
 import com.young.pojo.RepaymentPlan;
@@ -23,6 +27,22 @@ public class FinanceServiceImpl implements FinanceService {
     private RepaymentRecordMapper recordMapper;
     @Autowired
     private OverdueScanTask overdueScanTask;
+
+    @Override
+    public PageResult<RepaymentPlan> getAllPlans(PageQuery pageQuery) {
+        PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
+        List<RepaymentPlan> list = planMapper.selectAll();
+        PageInfo<RepaymentPlan> pageInfo = new PageInfo<>(list);
+        return PageResult.of(pageInfo);
+    }
+
+    @Override
+    public PageResult<RepaymentRecord> getAllRecords(PageQuery pageQuery) {
+        PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
+        List<RepaymentRecord> list = recordMapper.selectAll();
+        PageInfo<RepaymentRecord> pageInfo = new PageInfo<>(list);
+        return PageResult.of(pageInfo);
+    }
 
     @Override
     public List<RepaymentPlan> getAllPlans() {

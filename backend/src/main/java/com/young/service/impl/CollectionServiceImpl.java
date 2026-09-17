@@ -1,6 +1,10 @@
 package com.young.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.young.common.BusinessException;
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.mapper.CollectionRecordMapper;
 import com.young.mapper.RepaymentPlanMapper;
 import com.young.mapper.SysMessageMapper;
@@ -27,6 +31,15 @@ public class CollectionServiceImpl implements CollectionService {
     private RepaymentPlanMapper planMapper;
     @Autowired
     private SysMessageMapper messageMapper;
+
+    @Override
+    public PageResult<RepaymentPlan> getOverduePlans(PageQuery pageQuery) {
+        PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
+        // status=2 的账单即逾期中
+        List<RepaymentPlan> list = planMapper.selectOverdueAll();
+        PageInfo<RepaymentPlan> pageInfo = new PageInfo<>(list);
+        return PageResult.of(pageInfo);
+    }
 
     @Override
     public List<RepaymentPlan> getOverduePlans() {

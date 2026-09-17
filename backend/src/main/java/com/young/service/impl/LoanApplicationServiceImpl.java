@@ -1,6 +1,10 @@
 package com.young.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.young.common.BusinessException;
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.mapper.LoanApplicationMapper;
 import com.young.mapper.LoanProductMapper;
 import com.young.mapper.RepaymentPlanMapper;
@@ -140,12 +144,23 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     }
 
     @Override
-    public List<LoanApplication> getApplicationList(Long userId) {
-        return applicationMapper.selectList(userId);
+    public PageResult<LoanApplication> getApplicationList(Long userId, PageQuery pageQuery) {
+        PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
+        List<LoanApplication> list = applicationMapper.selectList(userId);
+        PageInfo<LoanApplication> pageInfo = new PageInfo<>(list);
+        return PageResult.of(pageInfo);
     }
 
     @Override
-    public List<LoanApplication> getPendingList() {
-        return applicationMapper.selectPending();
+    public PageResult<LoanApplication> getPendingList(PageQuery pageQuery) {
+        PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
+        List<LoanApplication> list = applicationMapper.selectPending();
+        PageInfo<LoanApplication> pageInfo = new PageInfo<>(list);
+        return PageResult.of(pageInfo);
+    }
+
+    @Override
+    public List<LoanApplication> getApplicationList(Long userId) {
+        return applicationMapper.selectList(userId);
     }
 }

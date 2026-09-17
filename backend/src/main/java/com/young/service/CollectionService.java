@@ -1,5 +1,7 @@
 package com.young.service;
 
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.pojo.CollectionRecord;
 import com.young.pojo.RepaymentPlan;
 
@@ -10,7 +12,10 @@ import java.util.List;
  */
 public interface CollectionService {
 
-    /** 查询全部逾期账单 */
+    /** 查询全部逾期账单（分页） */
+    PageResult<RepaymentPlan> getOverduePlans(PageQuery pageQuery);
+
+    /** 查询全部逾期账单（不分页） */
     List<RepaymentPlan> getOverduePlans();
 
     /**
