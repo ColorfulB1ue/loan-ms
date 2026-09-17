@@ -1,11 +1,8 @@
 spring:
   application:
     name: loan-ms
-  datasource:
-    url: jdbc:mysql://localhost:3306/loan
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 1234
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   servlet:
     multipart:
       max-file-size: 10MB
@@ -24,23 +21,22 @@ mybatis:
   configuration:
     # 驼峰命名
     map-underscore-to-camel-case: true
+    # 开启二级缓存
+    cache-enabled: true
 
-# 文件上传存储目录（相对路径基于后端启动目录，默认在 backend/uploads/）
-# 如需修改，请改为绝对路径或相对启动目录的路径
-upload:
-  dir: uploads/
+# 服务器配置
+server:
+  port: ${SERVER_PORT:8080}
+  tomcat:
+    max-threads: 200
+    min-spare-threads: 20
 
-# JWT 认证配置
-jwt:
-  # HS256 签名密钥（测试环境强随机值，生产请通过密钥管理服务注入）
-  secret: dGhpcy1pcy1hLXZlcnktc3Ryb25nLWFuZC1yYW5kb20tc2VjcmV0LWtleS1mb3Itand0LWhzMjU2LWFsZ29yaXRobS1pbi1sb2FuLW1zLXRlc3QtZW52aXJvbm1lbnQ=
-
-# SpringDoc OpenAPI 配置
-springdoc:
-  swagger-ui:
-    path: /doc.html
-    tags-sorter: alpha
-    operations-sorter: alpha
-  api-docs:
-    path: /v3/api-docs
-  packages-to-scan: com.young.controller
+# Actuator 监控配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when_authorized

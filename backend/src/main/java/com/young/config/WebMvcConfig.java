@@ -2,16 +2,26 @@ package com.young.config;
 
 import com.young.common.JwtAuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
     private JwtAuthInterceptor jwtAuthInterceptor;
+
+    @Value("${cors.allowed-origins:http://localhost:5173}")
+    private String allowedOrigins;
+
+    @Value("${springdoc.swagger-ui.path:/doc.html}")
+    private String swaggerPath;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -24,7 +34,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         // 文件下载接口自带 token 校验，避免与拦截器重复
                         "/api/file/**",
                         "/error",
-                        "/doc.html",
+                        swaggerPath,
                         "/swagger-ui/**",
                         "/v3/api-docs/**",
                         "/webjars/**"
@@ -33,9 +43,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        // 显式配置 CORS，仅允许前端开发地址，禁用通配符
+        // 从配置文件读取允许的源，支持多环境配置
+        String[] origins = Arrays.stream(allowedOrigins.split(","))
+                .map(String::trim)
+                .toArray(String[]::new);
+
         registry.addMapping("/api/**")
-                .allowedOriginPatterns("http://localhost:5173", "http://127.0.0.1:5173")
+                .allowedOriginPatterns(origins)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true)
