@@ -194,12 +194,17 @@ onMounted(() => loadMessages())
   padding: 4px 12px;
   letter-spacing: 0.5px;
   line-height: 1;
+  vertical-align: middle;
 }
 
-.empty-badge .el-icon {
+.empty-badge :deep(.el-icon) {
   font-size: 12px;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
 }
 
 /* 消息卡片 */
