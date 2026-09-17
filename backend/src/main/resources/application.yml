@@ -31,6 +31,11 @@ server:
     max-threads: 200
     min-spare-threads: 20
 
+# JWT 认证配置（默认值，可被profile配置覆盖）
+jwt:
+  secret: ${JWT_SECRET:dGhpcy1pcy1hLXZlcnktc3Ryb25nLWFuZC1yYW5kb20tc2VjcmV0LWtleS1mb3Itand0LWhzMjU2LWFsZ29yaXRobS1pbi1sb2FuLW1zLXRlc3QtZW52aXJvbm1lbnQ=}
+  expiration: 7200000
+
 # Actuator 监控配置
 management:
   endpoints:
