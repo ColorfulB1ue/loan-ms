@@ -103,6 +103,42 @@
   color: #0f172a !important;
 }
 
+/* 深色主题菜单样式 */
+[data-theme="dark"] .el-menu-vertical :deep(.el-menu-item) {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .el-menu-vertical :deep(.el-menu-item .el-icon) {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .el-menu-vertical :deep(.el-menu-item.is-active) {
+  background: rgba(59, 130, 246, 0.15) !important;
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .el-menu-vertical :deep(.el-menu-item.is-active .el-icon) {
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .el-menu-vertical :deep(.el-menu-item.is-active:hover) {
+  background: rgba(59, 130, 246, 0.2) !important;
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .el-menu-vertical :deep(.el-menu-item.is-active:hover .el-icon) {
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .el-menu-vertical :deep(.el-menu-item:hover) {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .el-menu-vertical :deep(.el-menu-item:hover .el-icon) {
+  color: #e2e8f0 !important;
+}
+
 /* 菜单内文字 */
 .el-menu-vertical :deep(.el-menu-item span:not(.menu-count)) {
   flex: 1;
