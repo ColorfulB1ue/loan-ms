@@ -130,7 +130,7 @@ html.dark {
   border: none !important;
 }
 
-/* 强制所有输入框圆角 */
+/* 强制所有输入框圆角，移除边框 */
 .el-input,
 .el-input__wrapper,
 .el-input__wrapper.is-focus,
@@ -138,9 +138,10 @@ html.dark {
 .el-input__wrapper:focus-visible {
   border-radius: var(--radius-xl, 12px) !important;
   --el-input-border-radius: 12px;
+  border: none !important;
 }
 
-/* 移除所有输入框内部元素的 outline */
+/* 移除所有输入框内部元素的 outline 和边框 */
 .el-input__wrapper *,
 .el-input__wrapper *:focus,
 .el-input__wrapper *:focus-visible,
@@ -148,7 +149,9 @@ html.dark {
 .el-input__inner:focus,
 .el-input__inner:focus-visible {
   outline: none !important;
+  border: none !important;
   border-radius: inherit !important;
+  box-shadow: none !important;
 }
 
 * {
