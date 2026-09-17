@@ -175,13 +175,21 @@ onMounted(() => loadMessages())
 }
 
 .empty-badge {
-  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
   color: var(--color-success);
   background: var(--color-success-light);
-  border: 1px solid rgba(22, 163, 74, 0.2);
+  border: none;
   border-radius: var(--radius-full, 20px);
-  padding: 6px 18px;
+  padding: 4px 12px;
   letter-spacing: 0.5px;
+}
+
+.empty-badge .el-icon {
+  font-size: 14px;
+  vertical-align: middle;
 }
 
 /* 消息卡片 */
