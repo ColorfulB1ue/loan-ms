@@ -36,6 +36,10 @@
         SELECT * FROM user_profile WHERE status = 0 ORDER BY create_time ASC
     </select>
 
+    <select id="countPending" resultType="int">
+        SELECT COUNT(*) FROM user_profile WHERE status = 0
+    </select>
+
     <select id="selectAllList" resultType="com.young.pojo.UserProfile">
         SELECT u.id AS userId, u.username, u.create_time AS createTime,
                p.id, p.real_name AS realName, p.id_card AS idCard,

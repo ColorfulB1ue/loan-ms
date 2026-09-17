@@ -12,9 +12,12 @@ public interface UserProfileMapper {
     int update(UserProfile profile);
     UserProfile selectByUserId(Long userId);
     UserProfile selectById(Long id);
-    
+
     // 查询待审核的 KYC 申请
     List<UserProfile> selectPendingList();
+
+    // 查询待审核的 KYC 申请数量
+    int countPending();
 
     // 查询所有系统的客户实名档案
     List<UserProfile> selectAllList();

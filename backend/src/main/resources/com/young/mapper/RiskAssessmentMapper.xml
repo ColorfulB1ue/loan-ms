@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.young.mapper.RiskAssessmentMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO risk_assessment (user_id, loan_id, credit_score, credit_level, risk_level, risk_reasons, auto_approved, create_time)
+        VALUES (#{userId}, #{loanId}, #{creditScore}, #{creditLevel}, #{riskLevel}, #{riskReasons}, #{autoApproved}, NOW())
+    </insert>
+
+    <select id="selectById" resultType="com.young.pojo.RiskAssessment">
+        SELECT * FROM risk_assessment WHERE id = #{id}
+    </select>
+
+    <select id="selectLatestByUserId" resultType="com.young.pojo.RiskAssessment">
+        SELECT * FROM risk_assessment 
+        WHERE user_id = #{userId}
+        ORDER BY create_time DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectByLoanId" resultType="com.young.pojo.RiskAssessment">
+        SELECT * FROM risk_assessment WHERE loan_id = #{loanId}
+    </select>
+
+    <select id="selectByUserId" resultType="com.young.pojo.RiskAssessment">
+        SELECT * FROM risk_assessment 
+        WHERE user_id = #{userId}
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>

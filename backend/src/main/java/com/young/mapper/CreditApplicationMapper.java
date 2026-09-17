@@ -13,7 +13,10 @@ public interface CreditApplicationMapper {
     int updateStatusIfPending(CreditApplication application);
     CreditApplication selectById(Long id);
     CreditApplication selectLatestPendingByUserId(Long userId);
-    
+
     /** 查询待审核的额度申请 */
     List<CreditApplication> selectPendingList();
+
+    /** 查询待审核的额度申请数量 */
+    int countPending();
 }
