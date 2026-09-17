@@ -32,13 +32,9 @@
 
     <el-container class="main-body">
       <!-- 桌面端侧边栏 -->
-      <el-aside v-if="!isMobile" :width="isCollapse ? '64px' : '220px'" class="side-nav">
-        <div class="collapse-btn" @click="isCollapse = !isCollapse">
-          <el-icon><Fold v-if="!isCollapse" /><Expand v-else /></el-icon>
-        </div>
+      <el-aside v-if="!isMobile" width="220px" class="side-nav">
         <el-menu 
           :default-active="activeMenu" 
-          :collapse="isCollapse"
           class="el-menu-vertical" 
           router 
           background-color="transparent"
@@ -147,7 +143,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { 
   DataLine, Check, Coordinate, Coin, Goods, 
-  UserFilled, ArrowDown, SwitchButton, Key, Fold, Expand, Close
+  UserFilled, ArrowDown, SwitchButton, Key, Close
 } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/user'
 import { useBadges } from '@/composables/useBadges'
@@ -161,7 +157,6 @@ const route = useRoute()
 const userStore = useUserStore()
 
 const activeMenu = computed(() => route.path)
-const isCollapse = ref(false)
 const showMobileMenu = ref(false)
 const isMobile = ref(false)
 
@@ -233,21 +228,6 @@ const handleLogout = async () => {
 
 .mobile-menu-btn:hover {
   color: var(--primary-color);
-}
-
-.collapse-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  cursor: pointer;
-  color: var(--text-muted, #909399);
-  transition: all 0.3s;
-}
-
-.collapse-btn:hover {
-  color: var(--primary-color);
-  background: rgba(0, 0, 0, 0.02);
 }
 
 /* 菜单计数徽章 */

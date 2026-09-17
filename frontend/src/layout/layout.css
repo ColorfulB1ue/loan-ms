@@ -169,32 +169,6 @@
   background-color: var(--color-danger, #dc2626);
 }
 
-/* 菜单收起时隐藏文字和徽章，图标居中 */
-.el-menu-vertical.is-collapse :deep(.el-menu-item) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 !important;
-  margin: 4px 8px;
-  height: 40px;
-}
-
-.el-menu-vertical.is-collapse :deep(.el-menu-item .el-icon) {
-  margin: 0 !important;
-  position: static;
-}
-
-.el-menu-vertical.is-collapse :deep(.el-menu-item span:not(.el-icon)),
-.el-menu-vertical.is-collapse :deep(.el-menu-item .menu-count),
-.el-menu-vertical.is-collapse :deep(.menu-title) {
-  display: none;
-}
-
-/* 菜单收起时调整侧边栏底部 */
-.side-nav:has(.is-collapse) .sidebar-footer {
-  padding: 0 8px;
-}
-
 .content-area {
   padding: 24px;
   background: var(--bg-primary, #f8fafc);
