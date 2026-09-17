@@ -93,6 +93,7 @@ public class UserProfileController {
         UserProfile desensitized = new UserProfile();
         desensitized.setId(profile.getId());
         desensitized.setUserId(profile.getUserId());
+        desensitized.setUsername(profile.getUsername()); // 保留用户名
         desensitized.setRealName(DesensitizeUtils.desensitizeName(profile.getRealName()));
         desensitized.setIdCard(DesensitizeUtils.desensitizeIdCard(profile.getIdCard()));
         desensitized.setIdCardFront(profile.getIdCardFront());
