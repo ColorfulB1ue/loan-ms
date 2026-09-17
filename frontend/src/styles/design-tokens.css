@@ -162,4 +162,124 @@
   --color-danger-light: rgba(248, 113, 113, 0.15);
   --color-info: #22d3ee;
   --color-info-light: rgba(34, 211, 238, 0.15);
+
+  /* 表格深色主题 */
+  --table-bg: var(--bg-card);
+  --table-header-bg: var(--bg-secondary);
+  --table-row-hover-bg: var(--bg-hover);
+  --table-border: var(--border-default);
+  --table-text: var(--text-primary);
+  --table-header-text: var(--text-secondary);
+}
+
+/* ============================================
+ * 扩展令牌：图表配色
+ * ============================================ */
+:root {
+  --chart-color-1: #2563eb;
+  --chart-color-2: #3b82f6;
+  --chart-color-3: #0891b2;
+  --chart-color-4: #d97706;
+  --chart-color-5: #dc2626;
+  --chart-color-6: #7c3aed;
+  --chart-color-7: #16a34a;
+  --chart-color-8: #ec4899;
+
+  /* 图表语义色 */
+  --chart-success: var(--color-success);
+  --chart-warning: var(--color-warning);
+  --chart-danger: var(--color-danger);
+  --chart-info: var(--color-info);
+}
+
+[data-theme="dark"] {
+  --chart-color-1: #60a5fa;
+  --chart-color-2: #93c5fd;
+  --chart-color-3: #22d3ee;
+  --chart-color-4: #fbbf24;
+  --chart-color-5: #f87171;
+  --chart-color-6: #a78bfa;
+  --chart-color-7: #4ade80;
+  --chart-color-8: #f472b6;
+
+  --chart-success: var(--color-success);
+  --chart-warning: var(--color-warning);
+  --chart-danger: var(--color-danger);
+  --chart-info: var(--color-info);
+}
+
+/* ============================================
+ * 扩展令牌：玻璃态效果
+ * ============================================ */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-bg-sub: rgba(255, 255, 255, 0.25);
+  --glass-bg-heavy: rgba(255, 255, 255, 0.7);
+  --glass-border: var(--border-subtle);
+  --glass-blur: blur(12px);
+  --glass-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] {
+  --glass-bg: rgba(30, 41, 59, 0.45);
+  --glass-bg-sub: rgba(30, 41, 59, 0.25);
+  --glass-bg-heavy: rgba(30, 41, 59, 0.7);
+  --glass-border: var(--border-default);
+  --glass-shadow: var(--shadow-md);
+}
+
+/* ============================================
+ * 扩展令牌：组件专用
+ * ============================================ */
+:root {
+  /* 表单 */
+  --form-input-bg: var(--bg-card);
+  --form-input-border: var(--border-default);
+  --form-input-focus-border: var(--primary-color);
+  --form-input-focus-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  --form-label-color: var(--text-secondary);
+  --form-helper-color: var(--text-muted);
+
+  /* 弹窗 */
+  --modal-bg: var(--bg-card);
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+  --modal-border: var(--border-subtle);
+  --modal-shadow: var(--shadow-xl);
+
+  /* 标签 */
+  --tag-success-bg: var(--color-success-light);
+  --tag-success-text: var(--color-success);
+  --tag-warning-bg: var(--color-warning-light);
+  --tag-warning-text: var(--color-warning);
+  --tag-danger-bg: var(--color-danger-light);
+  --tag-danger-text: var(--color-danger);
+  --tag-info-bg: var(--color-info-light);
+  --tag-info-text: var(--color-info);
+
+  /* 徽章 */
+  --badge-bg: var(--danger-color);
+  --badge-text: #ffffff;
+
+  /* 工具提示 */
+  --tooltip-bg: var(--color-gray-800);
+  --tooltip-text: var(--color-gray-50);
+
+  /* 焦点状态 */
+  --focus-ring: 0 0 0 2px var(--bg-card), 0 0 0 4px var(--primary-color);
+  --focus-ring-offset: 0 0 0 2px var(--primary-color);
+
+  /* 触摸目标最小尺寸 */
+  --touch-target-min: 44px;
+  --touch-target-spacing: 8px;
+}
+
+[data-theme="dark"] {
+  --form-input-bg: var(--bg-secondary);
+  --form-input-border: var(--border-default);
+  --form-input-focus-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+
+  --modal-overlay: rgba(0, 0, 0, 0.7);
+
+  --tooltip-bg: var(--color-gray-200);
+  --tooltip-text: var(--color-gray-800);
 }

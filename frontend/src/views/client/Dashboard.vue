@@ -213,6 +213,14 @@ const initCharts = () => {
   const textSecondary = bodyStyle.getPropertyValue('--text-secondary').trim() || '#475569'
   const borderSubtle = bodyStyle.getPropertyValue('--border-subtle').trim() || 'rgba(0,0,0,0.1)'
 
+  // 从设计令牌获取图表颜色
+  const chartColors = [
+    bodyStyle.getPropertyValue('--chart-color-1').trim() || '#2563eb',
+    bodyStyle.getPropertyValue('--chart-color-2').trim() || '#3b82f6'
+  ]
+  const chartSuccess = bodyStyle.getPropertyValue('--chart-success').trim() || '#16a34a'
+  const chartWarning = bodyStyle.getPropertyValue('--chart-warning').trim() || '#d97706'
+
   const creditDom = document.getElementById('credit-gauge')
   if (creditDom && credit.value) {
     const creditChart = init(creditDom)
@@ -243,8 +251,8 @@ const initCharts = () => {
           },
           label: { show: false },
           data: [
-            { value: available, name: '可用信用额度', itemStyle: { color: '#10b981' } },
-            { value: used, name: '已占用或冻结额度', itemStyle: { color: '#f59e0b' } }
+            { value: available, name: '可用信用额度', itemStyle: { color: chartSuccess } },
+            { value: used, name: '已占用或冻结额度', itemStyle: { color: chartWarning } }
           ]
         }
       ]
@@ -296,8 +304,8 @@ const initCharts = () => {
           itemStyle: {
             borderRadius: [6, 6, 0, 0],
             color: new graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: '#3b82f6' },
-              { offset: 1, color: '#2563eb' }
+              { offset: 0, color: chartColors[1] },
+              { offset: 1, color: chartColors[0] }
             ])
           },
           data: finalAmounts

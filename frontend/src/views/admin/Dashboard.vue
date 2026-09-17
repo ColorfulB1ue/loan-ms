@@ -145,6 +145,18 @@ const initCharts = () => {
   const textSecondary = bodyStyle.getPropertyValue('--text-secondary').trim() || '#475569'
   const borderSubtle = bodyStyle.getPropertyValue('--border-subtle').trim() || 'rgba(0,0,0,0.1)'
 
+  // 从设计令牌获取图表颜色
+  const chartColors = [
+    bodyStyle.getPropertyValue('--chart-color-1').trim() || '#2563eb',
+    bodyStyle.getPropertyValue('--chart-color-2').trim() || '#3b82f6',
+    bodyStyle.getPropertyValue('--chart-color-3').trim() || '#0891b2',
+    bodyStyle.getPropertyValue('--chart-color-4').trim() || '#d97706',
+    bodyStyle.getPropertyValue('--chart-color-5').trim() || '#dc2626',
+    bodyStyle.getPropertyValue('--chart-color-6').trim() || '#7c3aed'
+  ]
+  const chartSuccess = bodyStyle.getPropertyValue('--chart-success').trim() || '#16a34a'
+  const chartDanger = bodyStyle.getPropertyValue('--chart-danger').trim() || '#dc2626'
+
   const pieDom = document.getElementById('pie-chart')
   if (pieDom) {
     const pieChart = init(pieDom)
@@ -183,8 +195,8 @@ const initCharts = () => {
             }
           },
           data: [
-            { value: activeLoan, name: '正常还款中', itemStyle: { color: '#10b981' } },
-            { value: stats.value.totalOverdue, name: '逾期坏账金额', itemStyle: { color: '#ef4444' } }
+            { value: activeLoan, name: '正常还款中', itemStyle: { color: chartSuccess } },
+            { value: stats.value.totalOverdue, name: '逾期坏账金额', itemStyle: { color: chartDanger } }
           ]
         }
       ]
@@ -222,8 +234,8 @@ const initCharts = () => {
           data: productDist.value.length > 0 ? productDist.value.map((item, idx) => ({
             value: item.value,
             name: item.name,
-            itemStyle: { color: ['#2563eb', '#3b82f6', '#0891b2', '#d97706', '#dc2626', '#7c3aed'][idx % 6] }
-          })) : [{ value: 0, name: '暂无数据', itemStyle: { color: '#2563eb' } }]
+            itemStyle: { color: [chartColors[0], chartColors[1], chartColors[2], chartColors[3], chartColors[4], chartColors[5]][idx % 6] }
+          })) : [{ value: 0, name: '暂无数据', itemStyle: { color: chartColors[0] } }]
         }
       ]
     })
@@ -294,12 +306,12 @@ const initCharts = () => {
           name: '每日放款量',
           type: 'line',
           smooth: true,
-          lineStyle: { width: 3, color: '#16a34a' },
+          lineStyle: { width: 3, color: chartSuccess },
           showSymbol: false,
           areaStyle: {
             opacity: 0.1,
             color: new graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: '#16a34a' },
+              { offset: 0, color: chartSuccess },
               { offset: 1, color: 'transparent' }
             ])
           },
@@ -309,12 +321,12 @@ const initCharts = () => {
           name: '每日申请笔数',
           type: 'line',
           smooth: true,
-          lineStyle: { width: 3, color: '#2563eb' },
+          lineStyle: { width: 3, color: chartColors[0] },
           showSymbol: false,
           areaStyle: {
             opacity: 0.1,
             color: new graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: '#2563eb' },
+              { offset: 0, color: chartColors[0] },
               { offset: 1, color: 'transparent' }
             ])
           },
