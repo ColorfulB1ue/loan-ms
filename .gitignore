@@ -60,10 +60,10 @@ build/
 ### Spring Boot ###
 application-local.yml
 application-local.properties
-application-dev.yml
-application-dev.properties
-application-test.yml
-application-test.properties
+# application-dev.yml  # 开发配置需要提交
+# application-dev.properties
+# application-test.yml
+# application-test.properties
 
 ### Environment ###
 .env
