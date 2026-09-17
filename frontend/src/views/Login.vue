@@ -228,7 +228,11 @@ const handleSubmit = async () => {
   box-shadow: 0 0 0 1px rgba(255,255,255,0.2) inset !important;
 }
 :deep(.el-input__wrapper.is-focus),
-:deep(.el-input__wrapper:focus) {
+:deep(.el-input__wrapper:focus),
+:deep(.el-input__wrapper:focus-visible),
+:deep(.el-input.is-focus .el-input__wrapper),
+:deep(.el-input .el-input__wrapper:focus),
+:deep(.el-input .el-input__wrapper:active) {
   outline: none !important;
   box-shadow: 0 0 0 1px var(--el-color-primary, #2563eb) inset, 0 0 0 3px rgba(37, 99, 235, 0.25) !important;
   border-radius: var(--radius-xl, 12px) !important;
@@ -236,12 +240,12 @@ const handleSubmit = async () => {
 :deep(.el-input__inner) {
   color: var(--text-inverse, #fff) !important;
 }
+:deep(.el-input__inner:focus),
+:deep(.el-input__inner:focus-visible) {
+  outline: none !important;
+}
 :deep(.el-input__inner::placeholder) {
   color: rgba(255,255,255,0.4);
-}
-/* 登录页输入框聚焦时的 outline（Element Plus 默认绿色框） */
-:deep(.el-input__wrapper):focus-visible {
-  outline: none !important;
 }
 
 .submit-btn {

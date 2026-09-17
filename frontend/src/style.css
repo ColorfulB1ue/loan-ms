@@ -118,10 +118,21 @@ html.dark {
 /* 强制输入框焦点使用主题色，禁用默认 outline */
 .el-input__wrapper.is-focus,
 .el-input__wrapper:focus,
+.el-input__wrapper:focus-visible,
+.el-input__wrapper:active,
+.el-input.is-focus .el-input__wrapper,
 .el-select__wrapper.is-focused,
-.el-textarea__inner:focus {
+.el-textarea__inner:focus,
+.el-textarea__inner:focus-visible {
   outline: none !important;
   box-shadow: 0 0 0 1px var(--el-color-primary) inset, 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+/* 强制所有输入框圆角 */
+.el-input__wrapper,
+.el-input__wrapper.is-focus,
+.el-input__wrapper:focus {
+  border-radius: var(--radius-xl, 12px) !important;
 }
 
 * {
