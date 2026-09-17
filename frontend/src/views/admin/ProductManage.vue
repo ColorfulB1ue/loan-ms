@@ -231,7 +231,7 @@ onMounted(() => loadData())
 :deep(.admin-table) { background: transparent !important; color: #fff; }
 :deep(.admin-table th.el-table__cell), :deep(.admin-table tr) { background-color: rgba(0,0,0,0.5) !important; color: #fff; font-weight: bold; }
 :deep(.admin-table td.el-table__cell) { border-bottom: 1px solid rgba(255,255,255,0.1); color: #f8fafc; }
-:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { background-color: rgba(98,106,239,0.25) !important; color: #fff; }
+:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { background-color: rgba(37, 99, 235, 0.25) !important; color: #fff; }
 
 .rate-value {
   color: #f59e0b;

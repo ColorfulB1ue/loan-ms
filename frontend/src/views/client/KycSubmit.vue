@@ -348,17 +348,17 @@ onMounted(() => loadData())
 }
 .card-header { text-align: center; margin-bottom: 30px; }
 .card-header h2 { font-size: 26px; color: #fff; margin-bottom: 8px;}
-.card-header p { color: #94a3b8; font-size: 14px;}
+.card-header p { color: var(--text-muted, #94a3b8); font-size: 14px;}
 
 .result-box {
     text-align: center; padding: 40px 0; color: #fff;
 }
 .result-box .icon { font-size: 60px; margin-bottom: 20px; }
-.warning-icon { color: #e6a23c; }
-.success-icon { color: #67c23a; }
-.danger-icon { color: #f56c6c; }
+.warning-icon { color: var(--color-warning, #e6a23c); }
+.success-icon { color: var(--color-success, #67c23a); }
+.danger-icon { color: var(--color-danger, #f56c6c); }
 
-:deep(.el-form-item__label) { color: #cbd5e0 !important; font-weight: bold;}
+:deep(.el-form-item__label) { color: var(--text-secondary, #cbd5e0) !important; font-weight: bold;}
 :deep(.el-input__wrapper), :deep(.el-select__wrapper) { background: rgba(0,0,0,0.3) !important; box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset !important; }
 :deep(.el-input__inner) { color: #fff !important; }
 :deep(.el-select__input) { color: #fff !important; }

@@ -129,7 +129,7 @@ onMounted(() => loadPlans())
 }
 :deep(.el-table td.el-table__cell) { border-bottom: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; }
 :deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) {
-  background-color: rgba(98,106,239,0.3) !important; color: #fff;
+  background-color: rgba(37, 99, 235, 0.3) !important; color: #fff;
 }
 
 /* 状态标签半透明化 */

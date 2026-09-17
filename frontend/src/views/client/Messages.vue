@@ -143,19 +143,19 @@ onMounted(() => loadMessages())
 .empty-icon-wrap {
   width: 110px;
   height: 110px;
-  background: rgba(98,106,239,0.18);
-  border: 1px solid rgba(98,106,239,0.35);
+  background: rgba(37, 99, 235, 0.18);
+  border: 1px solid rgba(37, 99, 235, 0.35);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 28px;
-  box-shadow: 0 0 50px rgba(98,106,239,0.35);
+  box-shadow: 0 0 50px rgba(37, 99, 235, 0.35);
 }
 
 .empty-icon-el {
   font-size: 52px;
-  color: #a5b4fc;
+  color: #93c5fd;
 }
 
 .empty-title {
@@ -196,7 +196,7 @@ onMounted(() => loadMessages())
   transition: all 0.2s;
   backdrop-filter: blur(10px);
 }
-.msg-card:hover { background: rgba(0,0,0,0.5) !important; border-color: rgba(98,106,239,0.7) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.35); }
+.msg-card:hover { background: rgba(0,0,0,0.5) !important; border-color: rgba(37, 99, 235, 0.7) !important; box-shadow: 0 4px 15px rgba(0,0,0, 0.35); }
 .msg-card.unread { border-left: 4px solid rgba(245, 108, 108, 0.85) !important; }
 
 .msg-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }

@@ -226,7 +226,7 @@ const handleLogout = async () => {
 .mobile-menu-btn {
   font-size: 20px;
   cursor: pointer;
-  color: #606266;
+  color: var(--text-secondary, #606266);
 }
 
 .mobile-menu-btn:hover {
@@ -239,7 +239,7 @@ const handleLogout = async () => {
   justify-content: center;
   height: 40px;
   cursor: pointer;
-  color: #909399;
+  color: var(--text-muted, #909399);
   transition: all 0.3s;
 }
 
@@ -270,7 +270,7 @@ const handleLogout = async () => {
 .menu-title {
   padding: 12px 20px 8px;
   font-size: 12px;
-  color: #909399;
+  color: var(--text-muted, #909399);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -280,7 +280,7 @@ const handleLogout = async () => {
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid #e4e7ed;
+  border-bottom: 1px solid var(--border-default, #e4e7ed);
   font-size: 16px;
   font-weight: 600;
 }

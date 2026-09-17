@@ -310,21 +310,21 @@ onMounted(() => loadData())
 :deep(.admin-table) { background: transparent !important; color: #fff;}
 :deep(.admin-table th.el-table__cell), :deep(.admin-table tr) { background-color: rgba(0,0,0,0.5) !important; color: #fff; font-weight: bold;}
 :deep(.admin-table td.el-table__cell) { border-bottom: 1px solid rgba(255,255,255,0.1); color: #f8fafc; }
-:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { background-color: rgba(98,106,239,0.25) !important; color: #fff; }
+:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { background-color: rgba(37, 99, 235, 0.25) !important; color: #fff; }
 
-.detail-container { color: #333; }
+.detail-container { color: var(--text-primary, #333); }
 .photo-zone { margin-top: 20px; text-align: center; }
-.photo-zone h4 { margin-bottom: 15px; color: #606266; }
+.photo-zone h4 { margin-bottom: 15px; color: var(--text-secondary, #606266); }
 .photo-grid { display: flex; justify-content: space-around; }
 .photo-item { width: 45%; }
-.photo-item p { margin-bottom: 8px; font-weight: bold; color: #909399; }
-.photo-item .el-image { width: 100%; height: 160px; border-radius: 8px; border: 1px dashed #dcdfe6; background: #fafafa;}
-.empty-pic { width: 100%; height: 160px; line-height: 160px; color: #c0c4cc; border: 1px dashed #dcdfe6; background: #f5f7fa; border-radius: 8px; }
+.photo-item p { margin-bottom: 8px; font-weight: bold; color: var(--text-muted, #909399); }
+.photo-item .el-image { width: 100%; height: 160px; border-radius: 8px; border: 1px dashed var(--border-default, #dcdfe6); background: var(--bg-primary, #fafafa);}
+.empty-pic { width: 100%; height: 160px; line-height: 160px; color: var(--text-muted, #c0c4cc); border: 1px dashed var(--border-default, #dcdfe6); background: var(--bg-secondary, #f5f7fa); border-radius: 8px; }
 
 .dialog-footer { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
 
-:deep(.el-descriptions__label) { background-color: #f5f7fa !important; width: 100px; font-weight: bold;}
-.text-gray { color: #909399; }
+:deep(.el-descriptions__label) { background-color: var(--bg-secondary, #f5f7fa) !important; width: 100px; font-weight: bold;}
+.text-gray { color: var(--text-muted, #909399); }
 
 .pagination-wrap {
   display: flex;
