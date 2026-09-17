@@ -222,8 +222,8 @@ const initCharts = () => {
           data: productDist.value.length > 0 ? productDist.value.map((item, idx) => ({
             value: item.value,
             name: item.name,
-            itemStyle: { color: ['#6366f1', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'][idx % 6] }
-          })) : [{ value: 0, name: '暂无数据', itemStyle: { color: '#6366f1' } }]
+            itemStyle: { color: ['#2563eb', '#3b82f6', '#0891b2', '#d97706', '#dc2626', '#7c3aed'][idx % 6] }
+          })) : [{ value: 0, name: '暂无数据', itemStyle: { color: '#2563eb' } }]
         }
       ]
     })
@@ -294,12 +294,12 @@ const initCharts = () => {
           name: '每日放款量',
           type: 'line',
           smooth: true,
-          lineStyle: { width: 3, color: '#10b981' },
+          lineStyle: { width: 3, color: '#16a34a' },
           showSymbol: false,
           areaStyle: {
             opacity: 0.1,
             color: new graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: '#10b981' },
+              { offset: 0, color: '#16a34a' },
               { offset: 1, color: 'transparent' }
             ])
           },
@@ -309,12 +309,12 @@ const initCharts = () => {
           name: '每日申请笔数',
           type: 'line',
           smooth: true,
-          lineStyle: { width: 3, color: '#6366f1' },
+          lineStyle: { width: 3, color: '#2563eb' },
           showSymbol: false,
           areaStyle: {
             opacity: 0.1,
             color: new graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: '#6366f1' },
+              { offset: 0, color: '#2563eb' },
               { offset: 1, color: 'transparent' }
             ])
           },
@@ -345,8 +345,8 @@ onMounted(async () => {
     try {
         const results = await Promise.allSettled([
             request.get('/admin/stat/overview'),
-            request.get('/kyc/pending'),
-            request.get('/loan/pending'),
+            request.get('/kyc/pending', { params: { pageNum: 1, pageSize: 100 } }),
+            request.get('/loan/pending', { params: { pageNum: 1, pageSize: 100 } }),
             request.get('/admin/stat/badges'),
             request.get('/admin/stat/product-distribution'),
             request.get('/admin/stat/weekly-trend')
@@ -361,8 +361,15 @@ onMounted(async () => {
             stats.value.totalOverdue = r1.value.data.totalOverdue
         }
 
-        if (r2.status === 'fulfilled' && r2.value.data) stats.value.kycPending = r2.value.data.length
-        if (r3.status === 'fulfilled' && r3.value.data) stats.value.loanPending = r3.value.data.length
+        // 处理分页格式数据
+        if (r2.status === 'fulfilled' && r2.value.data) {
+            const kycData = r2.value.data
+            stats.value.kycPending = kycData.list ? kycData.list.length : (Array.isArray(kycData) ? kycData.length : 0)
+        }
+        if (r3.status === 'fulfilled' && r3.value.data) {
+            const loanData = r3.value.data
+            stats.value.loanPending = loanData.list ? loanData.list.length : (Array.isArray(loanData) ? loanData.length : 0)
+        }
 
         if (r4.status === 'fulfilled' && r4.value.code === 200) {
           badges.value.kyc = r4.value.data.kyc

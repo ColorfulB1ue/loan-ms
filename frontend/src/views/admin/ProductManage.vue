@@ -6,7 +6,7 @@
           <h2>贷款产品管理</h2>
           <p>配置面向客户的贷款产品线，设置利率、额度与期限规则</p>
         </div>
-        <el-button type="primary" color="#626aef" style="color:#fff;" @click="openAdd">
+        <el-button type="primary" color="#2563eb" style="color:#fff;" @click="openAdd">
           <el-icon><Plus /></el-icon>
           新增产品
         </el-button>
@@ -98,7 +98,7 @@
       </el-form>
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" color="#626aef" style="color:#fff;" @click="save" :loading="saving">
+        <el-button type="primary" color="#2563eb" style="color:#fff;" @click="save" :loading="saving">
           {{ isEdit ? '保存修改' : '创建产品' }}
         </el-button>
       </template>

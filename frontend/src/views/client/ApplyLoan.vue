@@ -5,7 +5,7 @@
         <h2>申请贷款</h2>
         <p>您的全部贷款申请与审批记录</p>
       </div>
-      <el-button type="primary" size="large" @click="openDialog" color="#626aef"
+      <el-button type="primary" size="large" @click="openDialog" color="#2563eb"
         style="color:#fff; display:inline-flex; align-items:center; gap:6px;">
         <el-icon><Plus /></el-icon>
         新增贷款申请
@@ -87,7 +87,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button v-if="selectedProduct" type="primary" color="#626aef" @click="submit" :loading="submitting" style="color:#fff;">
+          <el-button v-if="selectedProduct" type="primary" color="#2563eb" @click="submit" :loading="submitting" style="color:#fff;">
             确认提交
           </el-button>
         </span>
@@ -184,13 +184,13 @@ onMounted(() => loadData())
 :deep(.el-table) { background: transparent !important; color: #fff; }
 :deep(.el-table th.el-table__cell), :deep(.el-table tr) { background-color: rgba(0,0,0,0.4) !important; color: #fff; font-weight: bold;}
 :deep(.el-table td.el-table__cell) { border-bottom: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; }
-:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { background-color: rgba(98,106,239,0.25) !important; color: #fff; }
+:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { background-color: rgba(37, 99, 235, 0.25) !important; color: #fff; }
 
 .rate-preview {
   margin: 15px 0 20px;
   padding: 15px;
-  background: rgba(98,106,239,0.1);
-  border-left: 4px solid #626aef;
+  background: rgba(37, 99, 235, 0.1);
+  border-left: 4px solid #2563eb;
   color: #333;
   border-radius: 4px;
 }
@@ -203,7 +203,7 @@ onMounted(() => loadData())
   border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px;
   cursor: pointer; transition: all 0.2s; background: #fff;
 }
-.product-card:hover { border-color: #626aef; box-shadow: 0 4px 12px rgba(98,106,239,0.15); transform: translateY(-2px); }
+.product-card:hover { border-color: #2563eb; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15); transform: translateY(-2px); }
 .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .p-name { font-weight: bold; font-size: 16px; color: #1e293b; }
 .p-rate { color: #f56c6c; font-size: 18px; font-weight: bold; margin-bottom: 6px; }
@@ -212,7 +212,7 @@ onMounted(() => loadData())
 
 .selected-product-bar {
   display: flex; justify-content: space-between; align-items: center;
-  background: rgba(98,106,239,0.1); border-left: 4px solid #626aef;
+  background: rgba(37, 99, 235, 0.1); border-left: 4px solid #2563eb;
   padding: 12px 16px; border-radius: 4px; margin-bottom: 20px;
   color: #1e293b; font-size: 14px;
 }

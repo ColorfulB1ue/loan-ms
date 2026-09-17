@@ -296,8 +296,8 @@ const initCharts = () => {
           itemStyle: {
             borderRadius: [6, 6, 0, 0],
             color: new graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: '#6366f1' },
-              { offset: 1, color: '#4f46e5' }
+              { offset: 0, color: '#3b82f6' },
+              { offset: 1, color: '#2563eb' }
             ])
           },
           data: finalAmounts

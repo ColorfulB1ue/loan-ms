@@ -16,7 +16,7 @@
          <h3>{{ profile.status === 0 ? '审核中' : (profile.status === 1 ? '已通过' : '已驳回') }}</h3>
          <p v-if="profile.status === 1" style="color: #67c23a; margin-top:10px;">您可以前往【申请贷款】发起贷款申请。</p>
          <div v-if="profile.status === 2" style="margin-top:20px;">
-            <el-button type="primary" color="#626aef" style="color:white; width:200px" size="large" @click="reSubmit">重新提交资料</el-button>
+            <el-button type="primary" color="#2563eb" style="color:white; width:200px" size="large" @click="reSubmit">重新提交资料</el-button>
          </div>
       </div>
 
@@ -101,7 +101,7 @@
         </el-row>
 
         <el-form-item>
-          <el-button type="primary" size="large" @click="submit" :loading="submitting" class="submit-btn" color="#626aef" style="color:white;">
+          <el-button type="primary" size="large" @click="submit" :loading="submitting" class="submit-btn" color="#2563eb" style="color:white;">
             确认提交认证
           </el-button>
         </el-form-item>
@@ -387,7 +387,7 @@ onMounted(() => loadData())
   align-items: center;
   box-sizing: border-box;
 }
-.avatar-uploader :deep(.el-upload:hover) { border-color: #626aef; }
+.avatar-uploader :deep(.el-upload:hover) { border-color: #2563eb; }
 
 /* 加号 + 提示文字的复合占位区 */
 .upload-placeholder {

@@ -246,22 +246,24 @@ const loadData = async () => {
     loading.value = true
     try {
         const [resKyc, resCredit] = await Promise.all([
-            request.get('/kyc/all'),
+            request.get('/kyc/all', { params: { pageNum: 1, pageSize: 100 } }),
             request.get('/credit/all')
         ])
-        
+
         const credits = resCredit.data || []
         const creditMap = {}
         for (const c of credits) {
             creditMap[c.userId] = c
         }
-        
-        const dataList = resKyc.data || []
+
+        const dataList = resKyc.data?.list || resKyc.data || []
         dataList.forEach(item => {
             item.credit = creditMap[item.userId] || null
         })
-        
+
         list.value = dataList
+    } catch (e) {
+        console.error('加载KYC数据失败:', e)
     } finally {
         loading.value = false
     }

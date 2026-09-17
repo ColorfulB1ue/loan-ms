@@ -160,16 +160,20 @@ const getOverdueDays = (dueDate) => {
 const loadPlans = async () => {
   loadingPlans.value = true
   try {
-    const res = await request.get('/finance/plans')
-    plans.value = res.data || []
+    const res = await request.get('/finance/plans', { params: { pageNum: 1, pageSize: 100 } })
+    plans.value = res.data?.list || res.data || []
+  } catch (e) {
+    console.error('加载还款计划失败:', e)
   } finally { loadingPlans.value = false }
 }
 
 const loadRecords = async () => {
   loadingRecords.value = true
   try {
-    const res = await request.get('/finance/records')
-    records.value = res.data || []
+    const res = await request.get('/finance/records', { params: { pageNum: 1, pageSize: 100 } })
+    records.value = res.data?.list || res.data || []
+  } catch (e) {
+    console.error('加载入账记录失败:', e)
   } finally { loadingRecords.value = false }
 }
 
@@ -183,8 +187,10 @@ const collectForm = ref({ planId: null, termIndex: 0, totalAmount: 0, method: '�
 const loadOverduePlans = async () => {
   loadingOverdue.value = true
   try {
-    const res = await request.get('/collection/overdue-plans')
-    overduePlans.value = res.data || []
+    const res = await request.get('/collection/overdue-plans', { params: { pageNum: 1, pageSize: 100 } })
+    overduePlans.value = res.data?.list || res.data || []
+  } catch (e) {
+    console.error('加载逾期数据失败:', e)
   } finally { loadingOverdue.value = false }
 }
 
@@ -202,9 +208,11 @@ const loadOverdueTab = async () => {
   loadingOverdue.value = true
   try {
     await triggerOverdue()
-    const res = await request.get('/collection/overdue-plans')
-    overduePlans.value = res.data || []
+    const res = await request.get('/collection/overdue-plans', { params: { pageNum: 1, pageSize: 100 } })
+    overduePlans.value = res.data?.list || res.data || []
     fetchBadges()
+  } catch (e) {
+    console.error('加载逾期数据失败:', e)
   } finally { loadingOverdue.value = false }
 }
 
@@ -245,11 +253,11 @@ onMounted(() => {
 :deep(.admin-table) { background: transparent !important; color: #fff;}
 :deep(.admin-table th.el-table__cell), :deep(.admin-table tr) { background-color: rgba(0,0,0,0.5) !important; color: #fff; font-weight: bold;}
 :deep(.admin-table td.el-table__cell) { border-bottom: 1px solid rgba(255,255,255,0.1); color: #f8fafc; }
-:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { background-color: rgba(98,106,239,0.25) !important; color: #fff; }
+:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { background-color: rgba(37, 99, 235, 0.25) !important; color: #fff; }
 
 :deep(.el-tabs__item) { color: #cbd5e1 !important; }
 :deep(.el-tabs__item.is-active) { color: #fff !important; font-weight: bold; }
-:deep(.el-tabs__active-bar) { background-color: #626aef !important; }
+:deep(.el-tabs__active-bar) { background-color: #2563eb !important; }
 :deep(.el-tabs__nav-wrap::after) { background-color: rgba(255,255,255,0.1) !important; }
 
 .tab-badge {
