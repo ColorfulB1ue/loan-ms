@@ -126,13 +126,29 @@ html.dark {
 .el-textarea__inner:focus-visible {
   outline: none !important;
   box-shadow: 0 0 0 1px var(--el-color-primary) inset, 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+  border-radius: var(--radius-xl, 12px) !important;
+  border: none !important;
 }
 
 /* 强制所有输入框圆角 */
+.el-input,
 .el-input__wrapper,
 .el-input__wrapper.is-focus,
-.el-input__wrapper:focus {
+.el-input__wrapper:focus,
+.el-input__wrapper:focus-visible {
   border-radius: var(--radius-xl, 12px) !important;
+  --el-input-border-radius: 12px;
+}
+
+/* 移除所有输入框内部元素的 outline */
+.el-input__wrapper *,
+.el-input__wrapper *:focus,
+.el-input__wrapper *:focus-visible,
+.el-input__inner,
+.el-input__inner:focus,
+.el-input__inner:focus-visible {
+  outline: none !important;
+  border-radius: inherit !important;
 }
 
 * {

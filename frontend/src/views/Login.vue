@@ -216,11 +216,13 @@ const handleSubmit = async () => {
 
 .form-body .el-input {
   margin-bottom: 20px;
+  --el-input-border-radius: 12px;
 }
 :deep(.el-input__wrapper) {
   background: rgba(0,0,0,0.2) !important;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset !important;
-  border-radius: var(--radius-xl, 12px) !important;
+  border-radius: 12px !important;
+  border: none !important;
   outline: none !important;
   transition: all var(--transition-normal, 0.2s);
 }
@@ -229,23 +231,38 @@ const handleSubmit = async () => {
 }
 :deep(.el-input__wrapper.is-focus),
 :deep(.el-input__wrapper:focus),
-:deep(.el-input__wrapper:focus-visible),
-:deep(.el-input.is-focus .el-input__wrapper),
-:deep(.el-input .el-input__wrapper:focus),
-:deep(.el-input .el-input__wrapper:active) {
+:deep(.el-input__wrapper:focus-visible) {
   outline: none !important;
+  border: none !important;
   box-shadow: 0 0 0 1px var(--el-color-primary, #2563eb) inset, 0 0 0 3px rgba(37, 99, 235, 0.25) !important;
-  border-radius: var(--radius-xl, 12px) !important;
+  border-radius: 12px !important;
 }
 :deep(.el-input__inner) {
   color: var(--text-inverse, #fff) !important;
+  outline: none !important;
+  border: none !important;
 }
 :deep(.el-input__inner:focus),
 :deep(.el-input__inner:focus-visible) {
   outline: none !important;
+  border: none !important;
 }
 :deep(.el-input__inner::placeholder) {
   color: rgba(255,255,255,0.4);
+}
+/* 覆盖 Element Plus 的输入框容器 */
+:deep(.el-input) {
+  --el-input-border-radius: 12px;
+}
+:deep(.el-input .el-input__wrapper) {
+  border-radius: 12px !important;
+}
+/* 移除所有可能的 outline 和 border */
+:deep(.el-input__wrapper *),
+:deep(.el-input__wrapper *:focus),
+:deep(.el-input__wrapper *:focus-visible) {
+  outline: none !important;
+  border-radius: 12px !important;
 }
 
 .submit-btn {
