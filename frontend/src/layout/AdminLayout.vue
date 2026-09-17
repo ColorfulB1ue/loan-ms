@@ -143,7 +143,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { 
   DataLine, Check, Coordinate, Coin, Goods, 
-  UserFilled, ArrowDown, SwitchButton, Key, Close
+  UserFilled, ArrowDown, SwitchButton, Key, Fold, Close
 } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/user'
 import { useBadges } from '@/composables/useBadges'
@@ -239,7 +239,7 @@ const handleLogout = async () => {
   line-height: 18px;
   padding: 0 5px;
   border-radius: var(--radius-full, 9px);
-  background-color: var(--color-primary, #2563eb);
+  background-color: #ef4444;
   color: #fff;
   font-size: 11px;
   font-weight: var(--font-weight-bold, 700);
@@ -248,11 +248,11 @@ const handleLogout = async () => {
 }
 
 .menu-count.warning {
-  background-color: var(--color-warning, #d97706);
+  background-color: #ef4444;
 }
 
 .menu-count.danger {
-  background-color: var(--color-danger, #dc2626);
+  background-color: #ef4444;
 }
 
 .menu-title {
