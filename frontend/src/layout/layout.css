@@ -2,76 +2,96 @@
   height: 100vh;
   width: 100%;
 }
+
 .top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--header-bg, #ffffff);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid var(--border-subtle, #e2e8f0);
   height: 60px;
+  padding: 0 20px;
 }
+
 .logo {
   font-size: 1.2rem;
-  font-weight: 800;
-  color: #fff;
+  font-weight: 700;
+  color: var(--primary-color, #2563eb);
+  letter-spacing: -0.02em;
 }
+
 .user-profile {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
+
 .role-tag {
   font-size: 0.8rem;
-  color: #a0aec0;
-  background: rgba(255,255,255,0.1);
+  color: var(--text-secondary, #475569);
+  background: var(--bg-secondary, #f1f5f9);
   padding: 4px 12px;
   border-radius: 20px;
 }
+
 .main-body {
   height: calc(100vh - 60px);
 }
+
 .side-nav {
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  border-right: 1px solid rgba(255,255,255,0.05);
+  background: var(--sidebar-bg, #ffffff);
+  border-right: 1px solid var(--border-subtle, #e2e8f0);
+  transition: width 0.3s ease;
 }
+
 .menu-title {
   padding: 20px 20px 10px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #e2e8f0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted, #94a3b8);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
+
 .el-menu-vertical {
   border-right: none;
 }
+
 .el-menu-vertical :deep(.el-menu-item) {
   margin: 4px 12px;
   border-radius: 8px;
-  color: #e2e8f0 !important; /* 改为与“核心业务区”标题相同的亮白灰 #e2e8f0 */
+  color: var(--text-secondary, #475569) !important;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
+
 .el-menu-vertical :deep(.el-menu-item .el-icon) {
-  color: #e2e8f0 !important;
+  color: var(--text-secondary, #475569) !important;
 }
+
 .el-menu-vertical :deep(.el-menu-item.is-active) {
-  background: rgba(255, 255, 255, 0.12) !important;
-  font-weight: 700 !important; /* 激活态仅加粗显示 */
-  color: #ffffff !important;
+  background: var(--primary-light, #dbeafe) !important;
+  font-weight: 600 !important;
+  color: var(--primary-color, #2563eb) !important;
 }
+
 .el-menu-vertical :deep(.el-menu-item.is-active .el-icon) {
-  color: #ffffff !important;
+  color: var(--primary-color, #2563eb) !important;
 }
+
 .el-menu-vertical :deep(.el-menu-item:hover) {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #ffffff !important;
+  background: var(--bg-hover, #f1f5f9) !important;
+  color: var(--text-primary, #0f172a) !important;
 }
+
 .el-menu-vertical :deep(.el-menu-item:hover .el-icon) {
-  color: #ffffff !important;
+  color: var(--text-primary, #0f172a) !important;
 }
+
 .content-area {
   padding: 24px;
-  background: transparent;
+  background: var(--bg-primary, #f8fafc);
   overflow-y: auto;
 }
 
@@ -80,31 +100,44 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: #fff;
+  color: var(--text-primary, #0f172a);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   padding: 6px 12px;
   border-radius: 20px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: var(--bg-secondary, #f1f5f9);
+  border: 1px solid var(--border-subtle, #e2e8f0);
   transition: all 0.2s;
   position: relative;
   outline: none;
 }
+
 .username-btn:hover {
-  background: rgba(255,255,255,0.18);
-  border-color: rgba(255,255,255,0.3);
+  background: var(--bg-hover, #e2e8f0);
+  border-color: var(--border-subtle, #cbd5e1);
 }
 
-/* 未读消息小红点（悬浮在用户名右上角，半透明红色发光质感） */
+/* 未读消息小红点 */
 .header-dot {
   position: absolute;
   top: 4px;
   right: 6px;
   width: 8px;
   height: 8px;
-  background: rgba(245, 108, 108, 0.85);
+  background: var(--danger-color, #dc2626);
   border-radius: 50%;
-  box-shadow: 0 0 6px rgba(245, 108, 108, 0.8);
+  box-shadow: 0 0 0 2px var(--bg-card, #ffffff);
+}
+
+/* 亮色主题下的头部 */
+[data-theme="light"] .top-header {
+  --header-bg: #ffffff;
+  background: var(--header-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .side-nav {
+  --sidebar-bg: #ffffff;
+  background: var(--sidebar-bg);
 }

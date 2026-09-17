@@ -1,45 +1,89 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-:root {
-  /* Rich Aesthetic HSL Palette */
+/* ============================================
+ * 亮色主题变量（默认）
+ * 金融/银行产品配色：专业、可信赖、清晰
+ * ============================================ */
+:root,
+[data-theme="light"] {
   --bg-primary: #f8fafc;
   --bg-secondary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-hover: #f1f5f9;
+  
   --text-primary: #0f172a;
   --text-secondary: #475569;
+  --text-muted: #94a3b8;
   
-  --primary-color: #4f46e5;      /* Indigo 600 */
-  --primary-hover: #4338ca;      /* Indigo 700 */
-  --primary-light: #e0e7ff;      /* Indigo 100 */
+  /* 金融蓝：专业、可信赖 */
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #dbeafe;
   
-  --success-color: #10b981;      /* Emerald 500 */
-  --warning-color: #f59e0b;      /* Amber 500 */
-  --danger-color: #ef4444;       /* Red 500 */
+  /* 语义色彩 */
+  --success-color: #16a34a;
+  --warning-color: #d97706;
+  --danger-color: #dc2626;
+  --info-color: #0891b2;
   
   --surface-card: #ffffff;
   --border-subtle: #e2e8f0;
+  --border-light: #f1f5f9;
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  
   color-scheme: light;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
-    --surface-card: #1e293b;
-    --border-subtle: #334155;
-  }
+/* ============================================
+ * 暗色主题变量
+ * 使用去饱和色调，降低视觉疲劳
+ * ============================================ */
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+  --bg-hover: #334155;
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  /* 暗色主题下使用更柔和的蓝色 */
+  --primary-color: #60a5fa;
+  --primary-hover: #3b82f6;
+  --primary-light: #1e3a5f;
+  
+  /* 暗色主题下的语义色彩（去饱和、更亮） */
+  --success-color: #4ade80;
+  --warning-color: #fbbf24;
+  --danger-color: #f87171;
+  --info-color: #22d3ee;
+  
+  --surface-card: #1e293b;
+  --border-subtle: #334155;
+  --border-light: #1e293b;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+
+  color-scheme: dark;
+}
+
+/* ============================================
+ * 全局样式
+ * ============================================ */
+:root {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 16px;
+  
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 * {
@@ -55,15 +99,125 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--bg-primary);
-  /* 现代渐变散布背景 */
-  background-image: 
-    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, hsla(339,49%,30%,0.2) 0, transparent 50%);
-  background-attachment: fixed;
 }
 
-/* 全局动画控制 */
+/* ============================================
+ * 暗色主题下的 Element Plus 覆盖
+ * ============================================ */
+[data-theme="dark"] .el-table {
+  --el-table-bg-color: var(--bg-card);
+  --el-table-tr-bg-color: var(--bg-card);
+  --el-table-header-bg-color: var(--bg-secondary);
+  --el-table-row-hover-bg-color: var(--bg-hover);
+  --el-table-border-color: var(--border-subtle);
+  --el-table-text-color: var(--text-primary);
+  --el-table-header-text-color: var(--text-primary);
+}
+
+[data-theme="dark"] .el-card {
+  --el-card-bg-color: var(--bg-card);
+  --el-card-border-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .el-dialog {
+  --el-dialog-bg-color: var(--bg-card);
+  --el-dialog-border-radius: 12px;
+}
+
+[data-theme="dark"] .el-drawer {
+  --el-drawer-bg-color: var(--bg-card);
+}
+
+[data-theme="dark"] .el-menu {
+  --el-menu-bg-color: transparent;
+  --el-menu-text-color: var(--text-secondary);
+  --el-menu-hover-bg-color: var(--bg-hover);
+  --el-menu-active-color: var(--primary-color);
+}
+
+[data-theme="dark"] .el-input {
+  --el-input-bg-color: var(--bg-secondary);
+  --el-input-border-color: var(--border-subtle);
+  --el-input-text-color: var(--text-primary);
+  --el-input-placeholder-color: var(--text-muted);
+}
+
+[data-theme="dark"] .el-select {
+  --el-select-input-color: var(--text-primary);
+}
+
+[data-theme="dark"] .el-form-item__label {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .el-pagination {
+  --el-pagination-bg-color: var(--bg-card);
+  --el-pagination-text-color: var(--text-secondary);
+  --el-pagination-button-bg-color: var(--bg-secondary);
+}
+
+/* 暗色主题下的布局样式 */
+[data-theme="dark"] .top-header {
+  --header-bg: rgba(15, 23, 42, 0.95);
+  background: var(--header-bg);
+  border-bottom-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .side-nav {
+  --sidebar-bg: rgba(15, 23, 42, 0.9);
+  background: var(--sidebar-bg);
+  border-right-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .logo {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .username-btn {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+  border-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .username-btn:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .header-dot {
+  background: var(--danger-color);
+  box-shadow: 0 0 6px var(--danger-color);
+}
+
+[data-theme="dark"] .menu-title {
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] .el-menu-vertical .el-menu-item {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .el-menu-vertical .el-menu-item .el-icon {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .el-menu-vertical .el-menu-item.is-active {
+  background: var(--primary-light) !important;
+  color: var(--primary-color) !important;
+}
+
+[data-theme="dark"] .el-menu-vertical .el-menu-item.is-active .el-icon {
+  color: var(--primary-color) !important;
+}
+
+[data-theme="dark"] .el-menu-vertical .el-menu-item:hover {
+  background: var(--bg-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ============================================
+ * 动画
+ * ============================================ */
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out forwards;
 }
@@ -82,9 +236,11 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 玻璃拟态基础卡片 */
+/* ============================================
+ * 玻璃拟态卡片
+ * ============================================ */
 .glass-card {
-  background: rgba(var(--surface-card), 0.7);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-subtle);
@@ -94,12 +250,18 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+[data-theme="dark"] .glass-card {
+  background: rgba(30, 41, 59, 0.8);
+}
+
 .glass-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
-/* 微动效按钮 */
+/* ============================================
+ * 按钮
+ * ============================================ */
 .btn-primary {
   background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
   color: white;
@@ -109,12 +271,12 @@ body {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
 }
 
 .btn-primary:hover {
   transform: scale(1.02);
-  box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
 }
 
 .btn-primary:active {

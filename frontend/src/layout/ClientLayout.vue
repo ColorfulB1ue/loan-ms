@@ -1,12 +1,18 @@
 <template>
   <el-container class="layout-container">
     <el-header class="top-header">
-      <div class="logo">贷款申请平台</div>
+      <div class="header-left">
+        <el-icon class="mobile-menu-btn" @click="showMobileMenu = true" v-if="isMobile">
+          <Fold />
+        </el-icon>
+        <div class="logo">贷款申请平台</div>
+      </div>
       <div class="user-profile">
+        <ThemeToggle />
         <el-dropdown trigger="click" placement="bottom-end">
           <span class="username-btn">
             <el-icon style="margin-right:4px;"><UserFilled /></el-icon>
-            {{ username }}
+            <span class="username-text">{{ username }}</span>
             <el-icon class="el-icon--right"><ArrowDown /></el-icon>
             <span v-if="unreadCount > 0" class="header-dot"></span>
           </span>
@@ -17,11 +23,11 @@
                 消息中心
                 <el-badge :value="unreadCount" :hidden="unreadCount === 0" style="margin-left:8px" />
               </el-dropdown-item>
-              <el-dropdown-item divided @click="openPwdDialog">
+              <el-dropdown-item divided @click="openPasswordDialog">
                 <el-icon><Key /></el-icon>
                 修改密码
               </el-dropdown-item>
-              <el-dropdown-item divided @click="logout" style="color:#f56c6c;">
+              <el-dropdown-item divided @click="handleLogout" style="color:#f56c6c;">
                 <el-icon><SwitchButton /></el-icon>
                 安全退出
               </el-dropdown-item>
@@ -32,175 +38,163 @@
     </el-header>
 
     <el-container class="main-body">
-      <el-aside width="220px" class="side-nav">
-        <el-menu :default-active="activeMenu" class="el-menu-vertical" router background-color="transparent">
+      <!-- 桌面端侧边栏 -->
+      <el-aside v-if="!isMobile" :width="isCollapse ? '64px' : '220px'" class="side-nav">
+        <div class="collapse-btn" @click="isCollapse = !isCollapse">
+          <el-icon><Fold v-if="!isCollapse" /><Expand v-else /></el-icon>
+        </div>
+        <el-menu 
+          :default-active="activeMenu" 
+          :collapse="isCollapse"
+          class="el-menu-vertical" 
+          router 
+          background-color="transparent"
+        >
           <div class="menu-title">金融服务</div>
-          <el-menu-item index="/client/dashboard"><el-icon><Odometer /></el-icon><span>我的额度</span></el-menu-item>
-          <el-menu-item index="/client/kyc"><el-icon><User /></el-icon><span>实名认证</span></el-menu-item>
-          <el-menu-item index="/client/apply"><el-icon><DocumentAdd /></el-icon><span>申请贷款</span></el-menu-item>
-          <el-menu-item index="/client/bills"><el-icon><Wallet /></el-icon><span>账单与还款</span></el-menu-item>
+          <el-menu-item index="/client/dashboard">
+            <el-icon><Odometer /></el-icon>
+            <span>我的额度</span>
+          </el-menu-item>
+          <el-menu-item index="/client/kyc">
+            <el-icon><User /></el-icon>
+            <span>实名认证</span>
+          </el-menu-item>
+          <el-menu-item index="/client/apply">
+            <el-icon><DocumentAdd /></el-icon>
+            <span>申请贷款</span>
+          </el-menu-item>
+          <el-menu-item index="/client/bills">
+            <el-icon><Wallet /></el-icon>
+            <span>账单与还款</span>
+          </el-menu-item>
           <el-menu-item index="/client/messages">
             <el-icon><Bell /></el-icon>
             <span>消息中心</span>
-            <span v-if="unreadCount > 0" class="menu-custom-badge">{{ unreadCount }}</span>
+            <el-badge v-if="unreadCount > 0" :value="unreadCount" class="menu-badge" />
           </el-menu-item>
         </el-menu>
       </el-aside>
+
+      <!-- 移动端抽屉侧边栏 -->
+      <el-drawer
+        v-model="showMobileMenu"
+        direction="ltr"
+        size="260px"
+        :show-close="false"
+        class="mobile-drawer"
+      >
+        <div class="mobile-menu-header">
+          <span>贷款申请平台</span>
+          <el-icon @click="showMobileMenu = false"><Close /></el-icon>
+        </div>
+        <el-menu 
+          :default-active="activeMenu" 
+          class="el-menu-vertical" 
+          router 
+          @select="showMobileMenu = false"
+        >
+          <div class="menu-title">金融服务</div>
+          <el-menu-item index="/client/dashboard">
+            <el-icon><Odometer /></el-icon>
+            <span>我的额度</span>
+          </el-menu-item>
+          <el-menu-item index="/client/kyc">
+            <el-icon><User /></el-icon>
+            <span>实名认证</span>
+          </el-menu-item>
+          <el-menu-item index="/client/apply">
+            <el-icon><DocumentAdd /></el-icon>
+            <span>申请贷款</span>
+          </el-menu-item>
+          <el-menu-item index="/client/bills">
+            <el-icon><Wallet /></el-icon>
+            <span>账单与还款</span>
+          </el-menu-item>
+          <el-menu-item index="/client/messages">
+            <el-icon><Bell /></el-icon>
+            <span>消息中心</span>
+            <el-badge v-if="unreadCount > 0" :value="unreadCount" class="menu-badge" />
+          </el-menu-item>
+        </el-menu>
+      </el-drawer>
+
       <el-main class="content-area">
         <router-view v-slot="{ Component }">
-          <transition name="fade" mode="out-in"><component :is="Component" /></transition>
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
         </router-view>
       </el-main>
     </el-container>
 
     <!-- 修改密码弹窗 -->
-    <el-dialog v-model="pwdVisible" title="修改登录密码" width="400px" custom-class="dark-dialog" append-to-body>
-      <el-form :model="pwdForm" :rules="pwdRules" ref="pwdFormRef" label-position="top">
-        <el-form-item label="原密码" prop="oldPassword">
-          <el-input v-model="pwdForm.oldPassword" type="password" show-password placeholder="请输入当前密码" />
-        </el-form-item>
-        <el-form-item label="新密码" prop="newPassword">
-          <el-input v-model="pwdForm.newPassword" type="password" show-password placeholder="请输入新密码" />
-        </el-form-item>
-        <el-form-item label="确认新密码" prop="confirmPassword">
-          <el-input v-model="pwdForm.confirmPassword" type="password" show-password placeholder="请再次输入新密码" />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <el-button @click="pwdVisible = false">取消</el-button>
-        <el-button type="primary" @click="submitPwd" :loading="pwdLoading">确认修改</el-button>
-      </template>
-    </el-dialog>
+    <PasswordDialog ref="passwordDialogRef" />
   </el-container>
 </template>
 
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
-import { computed, ref, nextTick, onMounted, onUnmounted } from 'vue'
-import { Odometer, User, DocumentAdd, Wallet, Bell, UserFilled, ArrowDown, SwitchButton, Key } from '@element-plus/icons-vue'
-import request from '../utils/request'
-import { authApi } from '../api'
-import { useUserStore } from '../stores/user'
-import { ElMessage } from 'element-plus'
-import { jwtDecode } from 'jwt-decode'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { 
+  Odometer, User, DocumentAdd, Wallet, Bell, 
+  UserFilled, ArrowDown, SwitchButton, Key, Fold, Expand, Close
+} from '@element-plus/icons-vue'
+import { useUserStore } from '@/stores/user'
+import { usePassword } from '@/composables/usePassword'
+import { authApi } from '@/api'
+import request from '@/utils/request'
+import PasswordDialog from '@/components/PasswordDialog.vue'
+import ThemeToggle from '@/components/ThemeToggle.vue'
 
 const router = useRouter()
 const route = useRoute()
 const userStore = useUserStore()
+
 const activeMenu = computed(() => route.path)
+const isCollapse = ref(false)
+const showMobileMenu = ref(false)
+const isMobile = ref(false)
 const unreadCount = ref(0)
+
+// 使用 composables
+const { passwordDialogRef, openPasswordDialog } = usePassword()
+
+// 用户名
+const username = computed(() => {
+  if (userStore.username) return userStore.username
+  return '用户'
+})
+
+// 检测是否为移动端
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768
+}
+
+// 轮询定时器
 let timer = null
 
-// 读取账号名：优先用 store，缺失时从 token 解码并回写
-const getAccountName = () => {
-  if (userStore.username) return userStore.username
-  try {
-    if (userStore.token) {
-      const payload = jwtDecode(userStore.token)
-      const name = payload.sub || payload.username || ''
-      if (name) userStore.setUsername(name)
-      return name
-    }
-  } catch (e) {}
-  return '用户'
-}
-const username = ref(getAccountName())
-
+// 获取未读消息数
 const fetchUnreadCount = async () => {
   try {
     const res = await request.get('/message/unread-count')
     unreadCount.value = res.data || 0
   } catch (e) {
-    console.error('fetchUnreadCount error:', e)
+    console.error('获取未读消息数失败:', e)
   }
-}
-
-const pwdVisible = ref(false)
-const pwdLoading = ref(false)
-const pwdFormRef = ref(null)
-const pwdForm = ref({ oldPassword: '', newPassword: '', confirmPassword: '' })
-const pwdRules = {
-  oldPassword: [
-    { required: true, message: '请输入当前密码', trigger: 'blur' }
-  ],
-  newPassword: [
-    { required: true, message: '请输入新密码', trigger: 'blur' },
-    { min: 8, message: '密码长度至少8位', trigger: 'blur' },
-    {
-      validator: (rule, value, callback) => {
-        if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/.test(value)) {
-          callback(new Error('密码必须包含字母和数字'))
-        } else {
-          callback()
-        }
-      },
-      trigger: 'blur'
-    }
-  ],
-  confirmPassword: [
-    { required: true, message: '请再次输入新密码', trigger: 'blur' },
-    {
-      validator: (rule, value, callback) => {
-        if (value !== pwdForm.value.newPassword) {
-          callback(new Error('两次输入的新密码不一致'))
-        } else {
-          callback()
-        }
-      },
-      trigger: 'blur'
-    }
-  ]
-}
-
-const openPwdDialog = () => {
-  pwdForm.value = { oldPassword: '', newPassword: '', confirmPassword: '' }
-  pwdVisible.value = true
-  nextTick(() => {
-    pwdFormRef.value?.clearValidate()
-  })
-}
-
-const submitPwd = async () => {
-  if (!pwdFormRef.value) return
-  try {
-    await pwdFormRef.value.validate()
-  } catch (e) {
-    return
-  }
-  pwdLoading.value = true
-  try {
-    await authApi.changePassword({
-      oldPassword: pwdForm.value.oldPassword,
-      newPassword: pwdForm.value.newPassword
-    })
-    ElMessage.success('密码修改成功，请重新登录！')
-    pwdVisible.value = false
-    await logout()
-  } finally {
-    pwdLoading.value = false
-  }
-}
-
-const logout = async () => {
-  try {
-    await authApi.logout()
-  } catch (e) {
-    // 忽略吊销失败，继续清理本地状态
-  }
-  userStore.logout()
-  router.push('/login')
 }
 
 onMounted(() => {
   fetchUnreadCount()
   timer = setInterval(fetchUnreadCount, 60000)
-  // 监听消息已读事件
   window.addEventListener('unread-changed', fetchUnreadCount)
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+  
   // 已通过认证则显示真实姓名
   request.get('/kyc/my').then(res => {
     const profile = res.data
     if (profile && profile.status === 1 && profile.realName) {
-      username.value = profile.realName
+      userStore.setUsername(profile.realName)
     }
   }).catch(() => {})
 })
@@ -208,27 +202,113 @@ onMounted(() => {
 onUnmounted(() => {
   if (timer) clearInterval(timer)
   window.removeEventListener('unread-changed', fetchUnreadCount)
+  window.removeEventListener('resize', checkMobile)
 })
+
+// 登出
+const handleLogout = async () => {
+  try {
+    await authApi.logout()
+  } catch (e) {
+    // 忽略吊销失败
+  }
+  userStore.logout()
+  router.push('/login')
+}
 </script>
 
 <style scoped>
 @import './layout.css';
 
-.menu-custom-badge {
-    background-color: rgba(245, 108, 108, 0.65) !important;
-    color: #ffffff !important;
-  border: 1px solid rgba(245, 108, 108, 0.8);
-  border-radius: 10px;
-  padding: 0 6px;
-  font-size: 11px;
-  line-height: 16px;
-  height: 16px;
-  min-width: 16px;
-  margin-left: auto;
-  display: inline-flex;
-  justify-content: center;
+.header-left {
+  display: flex;
   align-items: center;
-  box-sizing: border-box;
-  font-weight: 700;
+  gap: 12px;
+}
+
+.mobile-menu-btn {
+  font-size: 20px;
+  cursor: pointer;
+  color: #606266;
+}
+
+.mobile-menu-btn:hover {
+  color: var(--primary-color, #2563eb);
+}
+
+.collapse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  cursor: pointer;
+  color: #909399;
+  transition: all 0.3s;
+}
+
+.collapse-btn:hover {
+  color: var(--primary-color, #2563eb);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.menu-badge {
+  margin-left: auto;
+}
+
+.menu-badge :deep(.el-badge__content) {
+  font-size: 10px;
+  height: 16px;
+  line-height: 16px;
+  padding: 0 4px;
+}
+
+.menu-title {
+  padding: 12px 20px 8px;
+  font-size: 12px;
+  color: #909399;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 红点样式已在 layout.css 中定义，这里不再重复 */
+
+.mobile-drawer .mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e4e7ed;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.mobile-drawer .mobile-menu-header .el-icon {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* 移动端样式 */
+@media (max-width: 767px) {
+  .username-text {
+    display: none;
+  }
+  
+  .top-header {
+    padding: 0 12px;
+  }
+  
+  .content-area {
+    padding: 12px !important;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

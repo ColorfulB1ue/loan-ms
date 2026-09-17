@@ -37,7 +37,7 @@
         </el-input>
 
         <el-button 
-          color="#626aef" 
+          color="#2563eb" 
           class="submit-btn" 
           :loading="loading"
           @click="handleSubmit" 
@@ -139,7 +139,7 @@ const handleSubmit = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0b0f19 0%, #1a1b41 50%, #0d1b2a 100%);
+  background: linear-gradient(135deg, #0c1220 0%, #1e3a5f 50%, #0d1b2a 100%);
   position: relative;
   overflow: hidden;
 }
@@ -152,7 +152,7 @@ const handleSubmit = async () => {
   left: -10%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(98,106,239,0.3) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(0,0,0,0) 70%);
   border-radius: 50%;
   filter: blur(40px);
   animation: floatLight 10s ease-in-out infinite alternate;
@@ -182,7 +182,7 @@ const handleSubmit = async () => {
   letter-spacing: 1px;
 }
 .header h1 span {
-  color: #626aef;
+  color: #60a5fa;
   font-weight: 400;
 }
 .header p {
@@ -209,9 +209,9 @@ const handleSubmit = async () => {
   transition: all 0.3s;
 }
 .toggle-mode span.active {
-  background: #626aef;
+  background: var(--primary-color, #2563eb);
   color: #fff;
-  box-shadow: 0 4px 15px rgba(98,106,239,0.4);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
 }
 
 .form-body .el-input {
