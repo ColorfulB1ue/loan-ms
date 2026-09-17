@@ -110,8 +110,8 @@ onMounted(() => loadMessages())
   transition: all 0.2s;
 }
 .glass-action-btn:hover:not(:disabled) {
-  background: rgba(79, 70, 229, 0.25) !important;
-  border-color: rgba(79, 70, 229, 0.45) !important;
+  background: rgba(37, 99, 235, 0.25) !important;
+  border-color: rgba(37, 99, 235, 0.45) !important;
   transform: translateY(-1px);
 }
 .glass-action-btn:disabled {

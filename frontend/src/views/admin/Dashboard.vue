@@ -522,7 +522,7 @@ onMounted(async () => {
 
 /* 微色彩边框指引与图标色调 */
 .stat-card.info { border-left: 4px solid var(--primary-color); }
-.stat-card.info .icon-wrapper { background: rgba(79, 70, 229, 0.1); color: var(--primary-color); }
+.stat-card.info .icon-wrapper { background: rgba(37, 99, 235, 0.1); color: var(--primary-color); }
 
 .stat-card.orange { border-left: 4px solid var(--warning-color); }
 .stat-card.orange .icon-wrapper { background: rgba(245, 158, 11, 0.1); color: var(--warning-color); }

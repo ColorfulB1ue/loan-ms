@@ -30,11 +30,11 @@ defineProps({
 
 <style scoped>
 .page-header {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 24px;
-  border: 1px solid rgba(99, 102, 241, 0.1);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border-radius: var(--radius-xl, 12px);
+  padding: var(--space-6, 24px);
+  margin-bottom: var(--space-6, 24px);
+  border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .header-content {
@@ -44,27 +44,27 @@ defineProps({
 }
 
 .page-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-primary, #1a1a2e);
+  font-size: var(--font-size-xl, 20px);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--text-primary);
   margin: 0;
 }
 
 .page-subtitle {
-  font-size: 14px;
-  color: var(--text-secondary, #666);
-  margin: 4px 0 0 0;
+  font-size: var(--font-size-sm, 14px);
+  color: var(--text-secondary);
+  margin: var(--space-1, 4px) 0 0 0;
 }
 
 .header-extra {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  margin-top: var(--space-4, 16px);
+  padding-top: var(--space-4, 16px);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .header-right {
   display: flex;
-  gap: 12px;
+  gap: var(--space-3, 12px);
   align-items: center;
 }
 </style>

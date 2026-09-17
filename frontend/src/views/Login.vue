@@ -139,7 +139,7 @@ const handleSubmit = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0c1220 0%, #1e3a5f 50%, #0d1b2a 100%);
+  background: linear-gradient(135deg, var(--color-gray-900, #0c1220) 0%, var(--color-primary-800, #1e3a5f) 50%, var(--color-gray-900, #0d1b2a) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -168,49 +168,49 @@ const handleSubmit = async () => {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-2xl, 24px);
+  box-shadow: var(--shadow-xl, 0 25px 50px -12px rgba(0, 0, 0, 0.5));
   z-index: 1;
   text-align: center;
 }
 
 .header h1 {
-  font-size: 28px;
-  color: #fff;
+  font-size: var(--font-size-3xl, 28px);
+  color: var(--text-inverse, #fff);
   margin-bottom: 5px;
-  font-weight: 800;
+  font-weight: var(--font-weight-bold, 800);
   letter-spacing: 1px;
 }
 .header h1 span {
-  color: #60a5fa;
-  font-weight: 400;
+  color: var(--color-primary-400, #60a5fa);
+  font-weight: var(--font-weight-normal, 400);
 }
 .header p {
-  color: #cbd5e1;
-  font-size: 14px;
+  color: var(--color-gray-300, #cbd5e1);
+  font-size: var(--font-size-sm, 14px);
   margin-bottom: 30px;
 }
 
 .toggle-mode {
   display: flex;
   background: rgba(0,0,0,0.3);
-  border-radius: 12px;
+  border-radius: var(--radius-xl, 12px);
   padding: 5px;
   margin-bottom: 30px;
 }
 .toggle-mode span {
   flex: 1;
   padding: 10px 0;
-  color: #cbd5e1;
+  color: var(--color-gray-300, #cbd5e1);
   cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: all 0.3s;
+  font-size: var(--font-size-sm, 14px);
+  font-weight: var(--font-weight-bold, bold);
+  border-radius: var(--radius-lg, 8px);
+  transition: all var(--transition-slow, 0.3s);
 }
 .toggle-mode span.active {
   background: var(--primary-color, #2563eb);
-  color: #fff;
+  color: var(--text-inverse, #fff);
   box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
 }
 
@@ -220,24 +220,24 @@ const handleSubmit = async () => {
 :deep(.el-input__wrapper) {
   background: rgba(0,0,0,0.2) !important;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset !important;
-  border-radius: 12px;
+  border-radius: var(--radius-xl, 12px);
 }
 :deep(.el-input__inner) {
-  color: #fff !important;
+  color: var(--text-inverse, #fff) !important;
 }
 
 .submit-btn {
   width: 100%;
   margin-top: 10px;
   height: 48px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: var(--font-size-base, 16px);
+  font-weight: var(--font-weight-bold, bold);
   letter-spacing: 2px;
 }
 
 .version {
   margin-top: 30px;
-  font-size: 12px;
+  font-size: var(--font-size-xs, 12px);
   color: rgba(255,255,255,0.3);
 }
 </style>

@@ -527,7 +527,7 @@ onMounted(() => {
 }
 
 .stat-card.primary { border-left: 4px solid var(--primary-color); }
-.stat-card.primary .icon-wrapper { background: rgba(99, 102, 241, 0.1); color: var(--primary-color); }
+.stat-card.primary .icon-wrapper { background: rgba(37, 99, 235, 0.1); color: var(--primary-color); }
 
 .stat-card.success { border-left: 4px solid var(--success-color); }
 .stat-card.success .icon-wrapper { background: rgba(16, 185, 129, 0.1); color: var(--success-color); }

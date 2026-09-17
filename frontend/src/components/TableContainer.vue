@@ -113,10 +113,10 @@ const handlePageChange = ({ page, limit }) => {
 
 <style scoped>
 .table-container {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  background: var(--bg-card, rgba(255, 255, 255, 0.95));
+  border-radius: var(--radius-xl, 12px);
+  padding: var(--space-5, 20px);
+  box-shadow: var(--shadow-sm);
 }
 
 .table-container.is-loading {
@@ -124,17 +124,17 @@ const handlePageChange = ({ page, limit }) => {
 }
 
 :deep(.el-table) {
-  border-radius: 8px;
+  border-radius: var(--radius-lg, 8px);
   overflow: hidden;
 }
 
 :deep(.el-table th) {
-  background-color: #f8f9fa !important;
-  color: #495057;
-  font-weight: 600;
+  background-color: var(--bg-secondary, #f8f9fa) !important;
+  color: var(--text-secondary, #495057);
+  font-weight: var(--font-weight-semibold, 600);
 }
 
 :deep(.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell) {
-  background: #f8f9fa;
+  background: var(--bg-secondary, #f8f9fa);
 }
 </style>
