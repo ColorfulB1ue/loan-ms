@@ -209,8 +209,8 @@ const handleSubmit = async () => {
   transition: all var(--transition-slow, 0.3s);
 }
 .toggle-mode span.active {
-  background: var(--primary-color, #2563eb);
-  color: var(--text-inverse, #fff);
+  background: #2563eb !important;
+  color: #fff !important;
   box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
 }
 

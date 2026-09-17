@@ -1,6 +1,11 @@
 <template>
-  <el-tooltip :content="isDarkMode ? '切换到亮色主题' : '切换到暗色主题'" placement="bottom">
-    <el-button :icon="isDarkMode ? Sunny : Moon" circle @click="toggleTheme" class="theme-toggle-btn" />
+  <el-tooltip :content="isDarkMode ? '切换到亮色主题' : '切换到暗色主题'" placement="right">
+    <div class="theme-toggle-btn" @click="toggleTheme">
+      <el-icon :size="18">
+        <Sunny v-if="isDarkMode" />
+        <Moon v-else />
+      </el-icon>
+    </div>
   </el-tooltip>
 </template>
 
@@ -16,13 +21,21 @@ const isDarkMode = computed(() => theme.value === 'dark')
 
 <style scoped>
 .theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-secondary, #475569);
+  transition: all 0.2s;
   background: transparent;
-  border: 1px solid var(--border-subtle, rgba(255,255,255,0.15));
-  color: var(--text-primary, #fff);
+  border: none;
 }
 
 .theme-toggle-btn:hover {
-  background: var(--bg-hover, rgba(255,255,255,0.1));
-  border-color: var(--border-subtle, rgba(255,255,255,0.3));
+  background: var(--bg-hover, #f1f5f9);
+  color: var(--primary-color, #2563eb);
 }
 </style>
