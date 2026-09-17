@@ -90,28 +90,35 @@ onMounted(() => loadMessages())
 </script>
 
 <style scoped>
-.page-container { padding: 30px; }
+.page-container { padding: var(--space-6, 30px); }
 .header-banner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: var(--space-6, 30px);
+  border-bottom: 1px solid var(--border-default);
+  padding-bottom: var(--space-5, 20px);
 }
-.header-banner h2 { font-size: 24px; color: #fff; margin-bottom: 5px; }
-.header-banner p { color: #cbd5e1; }
+.header-banner h2 { 
+  font-size: var(--font-size-2xl, 24px); 
+  color: var(--text-primary); 
+  margin-bottom: var(--space-1, 5px); 
+}
+.header-banner p { color: var(--text-secondary); margin: 0; }
 
 .glass-action-btn {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid #ffffff !important; /* 边框调成和字色一样的白色 */
-  color: #ffffff !important; /* 字体颜色回退为高雅白色 */
-  font-weight: 600;
-  transition: all 0.2s;
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-default) !important;
+  color: var(--text-primary) !important;
+  font-weight: var(--font-weight-semibold, 600);
+  transition: all var(--transition-normal, 0.2s);
 }
 .glass-action-btn:hover:not(:disabled) {
-  background: rgba(37, 99, 235, 0.25) !important;
-  border-color: rgba(37, 99, 235, 0.45) !important;
+  background: var(--primary-light) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
   transform: translateY(-1px);
 }
 .glass-action-btn:disabled {
@@ -177,6 +184,7 @@ onMounted(() => loadMessages())
 .empty-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   font-size: 12px;
   color: var(--color-success);
@@ -185,11 +193,13 @@ onMounted(() => loadMessages())
   border-radius: var(--radius-full, 20px);
   padding: 4px 12px;
   letter-spacing: 0.5px;
+  line-height: 1;
 }
 
 .empty-badge .el-icon {
-  font-size: 14px;
-  vertical-align: middle;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* 消息卡片 */
@@ -230,5 +240,15 @@ onMounted(() => loadMessages())
   box-shadow: 0 0 6px rgba(245, 108, 108, 0.8);
   margin-right: 8px;
   vertical-align: middle;
+}
+
+/* 移动端响应式 */
+@media (max-width: 768px) {
+  .page-container { padding: var(--space-4, 16px); }
+  .header-banner { flex-direction: column; align-items: flex-start; }
+  .glass-action-btn { width: 100%; }
+  .msg-card { padding: 14px 16px; }
+  .msg-title { font-size: var(--font-size-sm, 14px); }
+  .msg-body { font-size: var(--font-size-xs, 12px); }
 }
 </style>

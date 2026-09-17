@@ -1,18 +1,18 @@
 <template>
   <div class="page-container glass-panel">
     <div class="header-banner">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
+      <div class="header-content">
+        <div class="header-text">
           <h2>客户管理</h2>
           <p>管理系统中所有用户的实名认证和账户状态</p>
         </div>
-        <div>
+        <div class="header-actions">
           <el-input 
             v-model="searchKeyword" 
             placeholder="搜索姓名或账号" 
             :prefix-icon="Search"
             clearable
-            style="width: 250px" />
+            class="search-input" />
         </div>
       </div>
     </div>
@@ -308,12 +308,26 @@ onMounted(() => loadData())
   border-bottom: 1px solid var(--border-default); 
   padding-bottom: var(--space-5, 20px);
 }
-.header-banner h2 { 
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.header-text h2 { 
   font-size: var(--font-size-2xl, 24px); 
   color: var(--text-primary); 
   margin-bottom: var(--space-1, 5px); 
 }
-.header-banner p { color: var(--text-secondary); }
+.header-text p { color: var(--text-secondary); margin: 0; }
+.search-input { width: 250px; }
+
+@media (max-width: 768px) {
+  .page-container { padding: var(--space-4, 16px); }
+  .header-content { flex-direction: column; align-items: flex-start; }
+  .search-input { width: 100%; }
+}
 
 :deep(.admin-table) { background: transparent !important; }
 :deep(.admin-table th.el-table__cell) { 
