@@ -66,6 +66,7 @@
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .el-menu-vertical :deep(.el-menu-item .el-icon) {
@@ -92,14 +93,24 @@
 }
 
 /* 菜单内文字 */
-.el-menu-vertical :deep(.el-menu-item span) {
+.el-menu-vertical :deep(.el-menu-item span:not(.el-badge)) {
   flex: 1;
 }
 
-/* 菜单内徽章 */
+/* 菜单内徽章 - 定位在右侧 */
 .el-menu-vertical :deep(.el-menu-item .el-badge) {
-  margin-left: auto;
-  flex-shrink: 0;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.el-menu-vertical :deep(.el-menu-item .el-badge .el-badge__content) {
+  font-size: 11px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 6px;
+  border: none;
 }
 
 .content-area {

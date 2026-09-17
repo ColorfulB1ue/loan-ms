@@ -129,9 +129,9 @@ onMounted(() => loadMessages())
   justify-content: center;
   padding: 80px 20px;
   text-align: center;
-  border: 1px dashed rgba(255,255,255,0.12);
-  border-radius: 20px;
-  background: rgba(255,255,255,0.02);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-2xl, 20px);
+  background: var(--bg-secondary);
   animation: fadeIn 0.5s ease;
 }
 
@@ -143,72 +143,74 @@ onMounted(() => loadMessages())
 .empty-icon-wrap {
   width: 110px;
   height: 110px;
-  background: rgba(37, 99, 235, 0.18);
-  border: 1px solid rgba(37, 99, 235, 0.35);
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 28px;
-  box-shadow: 0 0 50px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 0 50px rgba(37, 99, 235, 0.15);
 }
 
 .empty-icon-el {
   font-size: 52px;
-  color: #93c5fd;
+  color: var(--primary-color);
 }
 
 .empty-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #ffffff;
+  font-size: var(--font-size-xl, 20px);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--text-primary);
   margin-bottom: 12px;
   letter-spacing: 0.5px;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
 }
 
 .empty-desc {
-  font-size: 14px;
-  color: #94a3b8;
-  line-height: 1.8;
+  font-size: var(--font-size-sm, 14px);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed, 1.75);
   max-width: 320px;
   margin-bottom: 24px;
 }
 
 .empty-badge {
   font-size: 13px;
-  color: #67c23a;
-  background: rgba(103,194,58,0.12);
-  border: 1px solid rgba(103,194,58,0.25);
-  border-radius: 20px;
+  color: var(--color-success);
+  background: var(--color-success-light);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  border-radius: var(--radius-full, 20px);
   padding: 6px 18px;
   letter-spacing: 0.5px;
 }
 
 /* 消息卡片 */
 .msg-card {
-  background: rgba(0,0,0,0.35) !important;
-  border: 1px solid rgba(255,255,255,0.15) !important;
-  border-radius: 12px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-default) !important;
+  border-radius: var(--radius-xl, 12px);
   padding: 18px 20px;
   margin-bottom: 14px;
   cursor: pointer;
-  transition: all 0.2s;
-  backdrop-filter: blur(10px);
+  transition: all var(--transition-normal, 0.2s);
 }
-.msg-card:hover { background: rgba(0,0,0,0.5) !important; border-color: rgba(37, 99, 235, 0.7) !important; box-shadow: 0 4px 15px rgba(0,0,0, 0.35); }
-.msg-card.unread { border-left: 4px solid rgba(245, 108, 108, 0.85) !important; }
+.msg-card:hover { 
+  background: var(--bg-hover) !important; 
+  border-color: var(--primary-color) !important; 
+  box-shadow: var(--shadow-md); 
+}
+.msg-card.unread { border-left: 4px solid var(--color-danger) !important; }
 
 .msg-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.msg-title { font-size: 16px; font-weight: bold; color: #ffffff !important; letter-spacing: 0.5px; }
-.msg-body { font-size: 14px; color: #f8fafc !important; line-height: 1.6; margin-bottom: 8px; font-weight: 500; }
-.msg-time { font-size: 12px; color: #cbd5e1 !important; text-align: right; }
+.msg-title { font-size: var(--font-size-base, 16px); font-weight: var(--font-weight-bold, 700); color: var(--text-primary) !important; }
+.msg-body { font-size: var(--font-size-sm, 14px); color: var(--text-secondary) !important; line-height: var(--line-height-normal, 1.5); margin-bottom: 8px; }
+.msg-time { font-size: var(--font-size-xs, 12px); color: var(--text-muted) !important; text-align: right; }
 
 :deep(.unread-tag) {
-  background-color: rgba(245, 108, 108, 0.65) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(245, 108, 108, 0.8) !important;
-  font-weight: bold;
+  background-color: var(--tag-danger-bg, var(--color-danger-light)) !important;
+  color: var(--tag-danger-text, var(--color-danger)) !important;
+  border: none !important;
+  font-weight: var(--font-weight-bold, 700);
 }
 
 .msg-dot {
@@ -216,7 +218,7 @@ onMounted(() => loadMessages())
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: rgba(245, 108, 108, 0.85);
+  background-color: var(--color-danger);
   box-shadow: 0 0 6px rgba(245, 108, 108, 0.8);
   margin-right: 8px;
   vertical-align: middle;

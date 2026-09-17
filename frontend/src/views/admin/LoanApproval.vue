@@ -134,7 +134,7 @@
       <el-form label-width="100px" style="margin-top: 20px;">
         <el-form-item label="批复额度">
           <el-input-number v-model="creditFormData.approveAmount" :min="1000" :step="1000" size="large" style="width: 100%" />
-          <div style="font-size: 12px; color: #909399; margin-top: 4px;">默认为申请额度，可调整</div>
+          <div style="font-size: 12px; color: var(--text-muted, #909399); margin-top: 4px;">默认为申请额度，可调整</div>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -344,26 +344,43 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.page-container { padding: 30px; }
-.header-banner { margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px;}
-.header-banner h2 { font-size: 24px; color: #fff; margin-bottom: 5px; }
-.header-banner p { color: #cbd5e1; }
+.page-container { padding: var(--space-6, 30px); }
+.header-banner { 
+  margin-bottom: var(--space-6, 30px); 
+  border-bottom: 1px solid var(--border-default); 
+  padding-bottom: var(--space-5, 20px);
+}
+.header-banner h2 { 
+  font-size: var(--font-size-2xl, 24px); 
+  color: var(--text-primary); 
+  margin-bottom: var(--space-1, 5px); 
+}
+.header-banner p { color: var(--text-secondary); }
 
-:deep(.admin-table) { background: transparent !important; color: #fff;}
-:deep(.admin-table th.el-table__cell), :deep(.admin-table tr) { background-color: rgba(0,0,0,0.5) !important; color: #fff; font-weight: bold;}
-:deep(.admin-table td.el-table__cell) { border-bottom: 1px solid rgba(255,255,255,0.1); color: #f8fafc;}
-:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { background-color: rgba(37, 99, 235, 0.25) !important; color: #fff;}
+:deep(.admin-table) { background: transparent !important; }
+:deep(.admin-table th.el-table__cell) { 
+  background-color: var(--table-header-bg, var(--bg-secondary)) !important; 
+  color: var(--table-header-text, var(--text-secondary)); 
+  font-weight: var(--font-weight-semibold, 600);
+}
+:deep(.admin-table td.el-table__cell) { 
+  border-bottom: 1px solid var(--table-border, var(--border-default)); 
+  color: var(--table-text, var(--text-primary)); 
+}
+:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { 
+  background-color: var(--table-row-hover-bg, var(--bg-hover)) !important; 
+}
 
-:deep(.el-tabs__item) { color: #cbd5e1 !important; }
-:deep(.el-tabs__item.is-active) { color: #fff !important; font-weight: bold; }
-:deep(.el-tabs__active-bar) { background-color: #2563eb !important; }
-:deep(.el-tabs__nav-wrap::after) { background-color: rgba(255,255,255,0.1) !important; }
+:deep(.el-tabs__item) { color: var(--text-secondary) !important; }
+:deep(.el-tabs__item.is-active) { color: var(--primary-color) !important; font-weight: var(--font-weight-semibold, 600); }
+:deep(.el-tabs__active-bar) { background-color: var(--primary-color) !important; }
+:deep(.el-tabs__nav-wrap::after) { background-color: var(--border-default) !important; }
 
 .tab-badge {
-  background-color: rgba(245, 108, 108, 0.65) !important;
+  background-color: var(--color-danger, #f56c6c) !important;
   color: #ffffff !important;
-  border: 1px solid rgba(245, 108, 108, 0.8) !important;
-  border-radius: 10px;
+  border: none !important;
+  border-radius: var(--radius-full, 10px);
   padding: 0 6px;
   font-size: 11px;
   line-height: 16px;
@@ -373,11 +390,11 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   margin-left: 4px;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold, 700);
 }
 
 :deep(.dark-dialog) {
-  border-radius: 16px;
+  border-radius: var(--radius-xl, 16px);
 }
 :deep(.dark-dialog .el-descriptions__body) {
   background: transparent;
@@ -389,6 +406,6 @@ onMounted(() => {
 .pagination-wrap {
   display: flex;
   justify-content: flex-end;
-  margin-top: 16px;
+  margin-top: var(--space-4, 16px);
 }
 </style>

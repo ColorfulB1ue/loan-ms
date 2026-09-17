@@ -223,25 +223,42 @@ onMounted(() => loadData())
 </script>
 
 <style scoped>
-.page-container { padding: 30px; }
-.header-banner { margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
-.header-banner h2 { font-size: 24px; color: #fff; margin-bottom: 5px; }
-.header-banner p { color: #cbd5e1; }
+.page-container { padding: var(--space-6, 30px); }
+.header-banner { 
+  margin-bottom: var(--space-6, 30px); 
+  border-bottom: 1px solid var(--border-default); 
+  padding-bottom: var(--space-5, 20px); 
+}
+.header-banner h2 { 
+  font-size: var(--font-size-2xl, 24px); 
+  color: var(--text-primary); 
+  margin-bottom: var(--space-1, 5px); 
+}
+.header-banner p { color: var(--text-secondary); }
 
-:deep(.admin-table) { background: transparent !important; color: #fff; }
-:deep(.admin-table th.el-table__cell), :deep(.admin-table tr) { background-color: rgba(0,0,0,0.5) !important; color: #fff; font-weight: bold; }
-:deep(.admin-table td.el-table__cell) { border-bottom: 1px solid rgba(255,255,255,0.1); color: #f8fafc; }
-:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { background-color: rgba(37, 99, 235, 0.25) !important; color: #fff; }
+:deep(.admin-table) { background: transparent !important; }
+:deep(.admin-table th.el-table__cell) { 
+  background-color: var(--table-header-bg, var(--bg-secondary)) !important; 
+  color: var(--table-header-text, var(--text-secondary)); 
+  font-weight: var(--font-weight-semibold, 600); 
+}
+:deep(.admin-table td.el-table__cell) { 
+  border-bottom: 1px solid var(--table-border, var(--border-default)); 
+  color: var(--table-text, var(--text-primary)); 
+}
+:deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) { 
+  background-color: var(--table-row-hover-bg, var(--bg-hover)) !important; 
+}
 
 .rate-value {
-  color: #f59e0b;
-  font-weight: bold;
-  font-size: 14px;
+  color: var(--color-warning, #f59e0b);
+  font-weight: var(--font-weight-bold, 700);
+  font-size: var(--font-size-sm, 14px);
 }
 
 .pagination-wrap {
   display: flex;
   justify-content: flex-end;
-  margin-top: 16px;
+  margin-top: var(--space-4, 16px);
 }
 </style>

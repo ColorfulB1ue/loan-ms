@@ -114,41 +114,52 @@ onMounted(() => loadPlans())
 </script>
 
 <style scoped>
-.page-container { padding: 30px; }
-.header-banner { margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px;}
-.header-banner h2 { font-size: 24px; color: #fff; margin-bottom: 5px; }
-.header-banner p { color: #cbd5e1; }
+.page-container { padding: var(--space-6, 30px); }
+.header-banner { 
+  margin-bottom: var(--space-6, 30px); 
+  border-bottom: 1px solid var(--border-default); 
+  padding-bottom: var(--space-5, 20px);
+}
+.header-banner h2 { 
+  font-size: var(--font-size-2xl, 24px); 
+  color: var(--text-primary); 
+  margin-bottom: var(--space-1, 5px); 
+}
+.header-banner p { color: var(--text-secondary); }
 
 :deep(.el-table) {
   background: transparent !important;
-  color: #fff;
 }
-:deep(.el-table th.el-table__cell), :deep(.el-table tr) {
-  background-color: rgba(0,0,0,0.4) !important;
-  color: #fff; font-weight: bold;
+:deep(.el-table th.el-table__cell) {
+  background-color: var(--table-header-bg, var(--bg-secondary)) !important;
+  color: var(--table-header-text, var(--text-secondary));
+  font-weight: var(--font-weight-semibold, 600);
 }
-:deep(.el-table td.el-table__cell) { border-bottom: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; }
+:deep(.el-table td.el-table__cell) { 
+  border-bottom: 1px solid var(--table-border, var(--border-default)); 
+  color: var(--table-text, var(--text-primary)); 
+}
 :deep(.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell) {
-  background-color: rgba(37, 99, 235, 0.3) !important; color: #fff;
+  background-color: var(--table-row-hover-bg, var(--bg-hover)) !important;
 }
 
-/* 状态标签半透明化 */
+/* 状态标签 */
 :deep(.el-tag--danger) {
-  background-color: rgba(245, 108, 108, 0.65) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(245, 108, 108, 0.8) !important;
-  font-weight: bold;
+  background-color: var(--tag-danger-bg, var(--color-danger-light)) !important;
+  color: var(--tag-danger-text, var(--color-danger)) !important;
+  border: none !important;
+  font-weight: var(--font-weight-bold, 700);
 }
 :deep(.el-tag--warning) {
-  background-color: rgba(245, 158, 11, 0.65) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(245, 158, 11, 0.8) !important;
-  font-weight: bold;
+  background-color: var(--tag-warning-bg, var(--color-warning-light)) !important;
+  color: var(--tag-warning-text, var(--color-warning)) !important;
+  border: none !important;
+  font-weight: var(--font-weight-bold, 700);
 }
 
 .pagination-wrap {
   display: flex;
   justify-content: flex-end;
-  margin-top: 16px;
+  margin-top: var(--space-4, 16px);
 }
 </style>

@@ -221,9 +221,19 @@ const handleSubmit = async () => {
   background: rgba(0,0,0,0.2) !important;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset !important;
   border-radius: var(--radius-xl, 12px);
+  transition: all var(--transition-normal, 0.2s);
+}
+:deep(.el-input__wrapper:hover) {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.2) inset !important;
+}
+:deep(.el-input__wrapper.is-focus) {
+  box-shadow: 0 0 0 1px var(--primary-color, #2563eb) inset, 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
 }
 :deep(.el-input__inner) {
   color: var(--text-inverse, #fff) !important;
+}
+:deep(.el-input__inner::placeholder) {
+  color: rgba(255,255,255,0.4);
 }
 
 .submit-btn {
