@@ -43,6 +43,7 @@
   background: var(--sidebar-bg, #ffffff);
   border-right: 1px solid var(--border-subtle, #e2e8f0);
   transition: width 0.3s ease;
+  position: relative;
 }
 
 .menu-title {
@@ -122,10 +123,33 @@
   background-color: var(--color-danger, #dc2626);
 }
 
+/* 菜单收起时隐藏文字和徽章 */
+.el-menu-vertical.is-collapse :deep(.el-menu-item span:not(.el-icon)),
+.el-menu-vertical.is-collapse :deep(.el-menu-item .menu-count),
+.el-menu-vertical.is-collapse :deep(.menu-title) {
+  display: none;
+}
+
+/* 菜单收起时调整侧边栏底部 */
+.side-nav:has(.is-collapse) .sidebar-footer {
+  padding: 0 8px;
+}
+
 .content-area {
   padding: 24px;
   background: var(--bg-primary, #f8fafc);
   overflow-y: auto;
+}
+
+/* 侧边栏底部 */
+.sidebar-footer {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 12px;
 }
 
 /* 右上角用户名按钮 */

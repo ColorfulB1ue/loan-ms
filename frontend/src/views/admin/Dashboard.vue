@@ -408,22 +408,15 @@ onMounted(async () => {
 
 <style scoped>
 /* 动态半透明玻璃态背景 */
-@media (prefers-color-scheme: dark) {
-  .page-container {
-    --glass-bg: rgba(30, 41, 59, 0.45);
-    --glass-bg-sub: rgba(30, 41, 59, 0.25);
-  }
+[data-theme="dark"] .page-container {
+  --glass-bg: var(--glass-bg-heavy, rgba(30, 41, 59, 0.7));
+  --glass-bg-sub: var(--glass-bg, rgba(30, 41, 59, 0.45));
 }
-@media (prefers-color-scheme: light) {
-  .page-container {
-    --glass-bg: rgba(255, 255, 255, 0.45);
-    --glass-bg-sub: rgba(255, 255, 255, 0.25);
-  }
-}
+
+[data-theme="light"] .page-container,
 .page-container {
-  padding: 24px;
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  --glass-bg-sub: rgba(255, 255, 255, 0.25);
+  --glass-bg: var(--glass-bg-heavy, rgba(255, 255, 255, 0.7));
+  --glass-bg-sub: var(--glass-bg, rgba(255, 255, 255, 0.45));
 }
 
 /* 半透明玻璃头部 */

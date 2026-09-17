@@ -8,7 +8,6 @@
         <div class="logo">贷款申请平台</div>
       </div>
       <div class="user-profile">
-        <ThemeToggle />
         <el-dropdown trigger="click" placement="bottom-end">
           <span class="username-btn">
             <el-icon style="margin-right:4px;"><UserFilled /></el-icon>
@@ -73,6 +72,9 @@
             <span v-if="unreadCount > 0" class="menu-count danger">{{ unreadCount }}</span>
           </el-menu-item>
         </el-menu>
+        <div class="sidebar-footer">
+          <ThemeToggle />
+        </div>
       </el-aside>
 
       <!-- 移动端抽屉侧边栏 -->
