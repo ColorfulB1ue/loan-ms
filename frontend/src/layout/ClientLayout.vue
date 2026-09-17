@@ -70,7 +70,7 @@
           <el-menu-item index="/client/messages">
             <el-icon><Bell /></el-icon>
             <span>消息中心</span>
-            <el-badge v-if="unreadCount > 0" :value="unreadCount" class="menu-badge" />
+            <span v-if="unreadCount > 0" class="menu-count danger">{{ unreadCount }}</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
@@ -113,7 +113,7 @@
           <el-menu-item index="/client/messages">
             <el-icon><Bell /></el-icon>
             <span>消息中心</span>
-            <el-badge v-if="unreadCount > 0" :value="unreadCount" class="menu-badge" />
+            <span v-if="unreadCount > 0" class="menu-count danger">{{ unreadCount }}</span>
           </el-menu-item>
         </el-menu>
       </el-drawer>
@@ -251,8 +251,29 @@ const handleLogout = async () => {
   background: rgba(0, 0, 0, 0.02);
 }
 
-.menu-badge {
-  /* 由 layout.css 统一控制 */
+/* 菜单计数徽章 */
+.menu-count {
+  margin-left: auto;
+  flex-shrink: 0;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-full, 9px);
+  background-color: var(--color-primary, #2563eb);
+  color: #fff;
+  font-size: 11px;
+  font-weight: var(--font-weight-bold, 700);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.menu-count.warning {
+  background-color: var(--color-warning, #d97706);
+}
+
+.menu-count.danger {
+  background-color: var(--color-danger, #dc2626);
 }
 
 .menu-title {

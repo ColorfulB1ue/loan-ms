@@ -53,19 +53,19 @@
           <el-menu-item index="/admin/kyc">
             <el-icon><Check /></el-icon>
             <span>客户管理</span>
-            <el-badge v-if="badges.kyc > 0" :value="badges.kyc > 99 ? '99+' : badges.kyc" class="menu-badge" />
+            <span v-if="badges.kyc > 0" class="menu-count">{{ badges.kyc > 99 ? '99+' : badges.kyc }}</span>
           </el-menu-item>
           
           <el-menu-item index="/admin/loan">
             <el-icon><Coordinate /></el-icon>
             <span>审批中心</span>
-            <el-badge v-if="pendingCount > 0" :value="pendingCount > 99 ? '99+' : pendingCount" class="menu-badge warning" />
+            <span v-if="pendingCount > 0" class="menu-count warning">{{ pendingCount > 99 ? '99+' : pendingCount }}</span>
           </el-menu-item>
           
           <el-menu-item index="/admin/finance">
             <el-icon><Coin /></el-icon>
             <span>财务中心</span>
-            <el-badge v-if="badges.overdue > 0" :value="badges.overdue > 99 ? '99+' : badges.overdue" class="menu-badge danger" />
+            <span v-if="badges.overdue > 0" class="menu-count danger">{{ badges.overdue > 99 ? '99+' : badges.overdue }}</span>
           </el-menu-item>
 
           <div class="menu-title" style="margin-top:12px">产品运营</div>
@@ -103,19 +103,19 @@
           <el-menu-item index="/admin/kyc">
             <el-icon><Check /></el-icon>
             <span>客户管理</span>
-            <el-badge v-if="badges.kyc > 0" :value="badges.kyc > 99 ? '99+' : badges.kyc" class="menu-badge" />
+            <span v-if="badges.kyc > 0" class="menu-count">{{ badges.kyc > 99 ? '99+' : badges.kyc }}</span>
           </el-menu-item>
           
           <el-menu-item index="/admin/loan">
             <el-icon><Coordinate /></el-icon>
             <span>审批中心</span>
-            <el-badge v-if="pendingCount > 0" :value="pendingCount > 99 ? '99+' : pendingCount" class="menu-badge warning" />
+            <span v-if="pendingCount > 0" class="menu-count warning">{{ pendingCount > 99 ? '99+' : pendingCount }}</span>
           </el-menu-item>
           
           <el-menu-item index="/admin/finance">
             <el-icon><Coin /></el-icon>
             <span>财务中心</span>
-            <el-badge v-if="badges.overdue > 0" :value="badges.overdue > 99 ? '99+' : badges.overdue" class="menu-badge danger" />
+            <span v-if="badges.overdue > 0" class="menu-count danger">{{ badges.overdue > 99 ? '99+' : badges.overdue }}</span>
           </el-menu-item>
 
           <div class="menu-title" style="margin-top:12px">产品运营</div>
@@ -248,16 +248,29 @@ const handleLogout = async () => {
   background: rgba(0, 0, 0, 0.02);
 }
 
-.menu-badge {
-  /* 由 layout.css 统一控制 */
+/* 菜单计数徽章 */
+.menu-count {
+  margin-left: auto;
+  flex-shrink: 0;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-full, 9px);
+  background-color: var(--color-primary, #2563eb);
+  color: #fff;
+  font-size: 11px;
+  font-weight: var(--font-weight-bold, 700);
+  text-align: center;
+  box-sizing: border-box;
 }
 
-.menu-badge.warning :deep(.el-badge__content) {
-  background-color: var(--color-warning, #e6a23c);
+.menu-count.warning {
+  background-color: var(--color-warning, #d97706);
 }
 
-.menu-badge.danger :deep(.el-badge__content) {
-  background-color: var(--color-danger, #f56c6c);
+.menu-count.danger {
+  background-color: var(--color-danger, #dc2626);
 }
 
 .menu-title {

@@ -93,24 +93,33 @@
 }
 
 /* 菜单内文字 */
-.el-menu-vertical :deep(.el-menu-item span:not(.el-badge)) {
+.el-menu-vertical :deep(.el-menu-item span:not(.menu-count)) {
   flex: 1;
 }
 
-/* 菜单内徽章 - 定位在右侧 */
-.el-menu-vertical :deep(.el-menu-item .el-badge) {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.el-menu-vertical :deep(.el-menu-item .el-badge .el-badge__content) {
-  font-size: 11px;
+/* 菜单内计数徽章 */
+.el-menu-vertical :deep(.el-menu-item .menu-count) {
+  margin-left: auto;
+  flex-shrink: 0;
+  min-width: 18px;
   height: 18px;
   line-height: 18px;
-  padding: 0 6px;
-  border: none;
+  padding: 0 5px;
+  border-radius: 9px;
+  background-color: var(--color-primary, #2563eb);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.el-menu-vertical :deep(.el-menu-item .menu-count.warning) {
+  background-color: var(--color-warning, #d97706);
+}
+
+.el-menu-vertical :deep(.el-menu-item .menu-count.danger) {
+  background-color: var(--color-danger, #dc2626);
 }
 
 .content-area {

@@ -86,6 +86,44 @@
   color: var(--text-primary);
 }
 
+/* ============================================
+ * Element Plus 主题色覆盖（蓝色主题）
+ * ============================================ */
+:root,
+:root.dark,
+html.dark {
+  --el-color-primary: #2563eb;
+  --el-color-primary-light-3: #5b8def;
+  --el-color-primary-light-5: #92b7f3;
+  --el-color-primary-light-7: #c8dbf9;
+  --el-color-primary-light-8: #dde9fb;
+  --el-color-primary-light-9: #eff5fd;
+  --el-color-primary-dark-2: #1d4ed8;
+  /* 输入框焦点色 */
+  --el-input-focus-border-color: var(--el-color-primary);
+}
+
+[data-theme="dark"],
+html.dark {
+  --el-color-primary: #60a5fa;
+  --el-color-primary-light-3: #3b82f6;
+  --el-color-primary-light-5: #2563eb;
+  --el-color-primary-light-7: #1d4ed8;
+  --el-color-primary-light-8: #1e40af;
+  --el-color-primary-light-9: #1e3a8a;
+  --el-color-primary-dark-2: #93c5fd;
+  --el-input-focus-border-color: var(--el-color-primary);
+}
+
+/* 强制输入框焦点使用主题色，禁用默认 outline */
+.el-input__wrapper.is-focus,
+.el-input__wrapper:focus,
+.el-select__wrapper.is-focused,
+.el-textarea__inner:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 1px var(--el-color-primary) inset, 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
