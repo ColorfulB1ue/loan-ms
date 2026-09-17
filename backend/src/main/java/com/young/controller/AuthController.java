@@ -4,16 +4,19 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.young.common.BusinessException;
+import com.young.common.ErrorCode;
 import com.young.common.LoginRateLimiter;
 import com.young.common.RequireRole;
 import com.young.common.Result;
+import com.young.dto.ChangePasswordRequest;
+import com.young.dto.LoginRequest;
+import com.young.dto.RegisterRequest;
 import com.young.service.SysUserService;
 import com.young.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @Tag(name = "认证登录管理")
 @RestController
@@ -29,18 +32,13 @@ public class AuthController {
 
     @Operation(summary = "用户注册")
     @PostMapping("/register")
-    public Result<?> register(@RequestBody Map<String, String> payload, HttpServletRequest request) {
-        String ip = getClientIp(request);
+    public Result<?> register(@Valid @RequestBody RegisterRequest request, HttpServletRequest httpRequest) {
+        String ip = getClientIp(httpRequest);
         if (loginRateLimiter.isIpBlocked(ip)) {
-            return Result.error(429, "该IP注册请求过于频繁，请15分钟后再试");
-        }
-        String username = payload.get("username");
-        String password = payload.get("password");
-        if (username == null || password == null) {
-            return Result.error(400, "账号和密码不能为空");
+            return Result.error(ErrorCode.TOO_MANY_REQUESTS, "该IP注册请求过于频繁，请15分钟后再试");
         }
         try {
-            userService.register(username, password);
+            userService.register(request.getUsername(), request.getPassword());
             return Result.success("注册成功！");
         } catch (BusinessException e) {
             loginRateLimiter.recordFailure(null, ip);
@@ -50,39 +48,31 @@ public class AuthController {
 
     @Operation(summary = "用户登录")
     @PostMapping("/login")
-    public Result<String> login(@RequestBody Map<String, String> payload, HttpServletRequest request) {
-        String username = payload.get("username");
-        String password = payload.get("password");
-        if (username == null || password == null) {
-            return Result.error(400, "账号和密码不能为空");
-        }
-        String ip = getClientIp(request);
-        if (loginRateLimiter.isBlocked(username) || loginRateLimiter.isIpBlocked(ip)) {
-            return Result.error(429, "登录失败次数过多，请15分钟后再试");
+    public Result<String> login(@Valid @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
+        String ip = getClientIp(httpRequest);
+        if (loginRateLimiter.isBlocked(request.getUsername()) || loginRateLimiter.isIpBlocked(ip)) {
+            return Result.error(ErrorCode.TOO_MANY_REQUESTS, "登录失败次数过多，请15分钟后再试");
         }
         try {
-            String token = userService.login(username, password);
-            loginRateLimiter.reset(username);
+            String token = userService.login(request.getUsername(), request.getPassword());
+            loginRateLimiter.reset(request.getUsername());
             return Result.success(token);
         } catch (BusinessException e) {
-            loginRateLimiter.recordFailure(username, ip);
+            loginRateLimiter.recordFailure(request.getUsername(), ip);
             throw e;
         }
     }
 
     @Operation(summary = "修改当前用户密码")
     @PostMapping("/change-password")
-    public Result<?> changePassword(@RequestBody Map<String, String> payload, HttpServletRequest request) {
-        Long userId = (Long) request.getAttribute("userId");
-        if (userId == null) return Result.error(401, "未登录或Token无效");
-        String oldPassword = payload.get("oldPassword");
-        String newPassword = payload.get("newPassword");
-        if (oldPassword == null || newPassword == null) {
-            return Result.error(400, "密码不能为空");
+    public Result<?> changePassword(@Valid @RequestBody ChangePasswordRequest request, HttpServletRequest httpRequest) {
+        Long userId = (Long) httpRequest.getAttribute("userId");
+        if (userId == null) {
+            return Result.error(ErrorCode.UNAUTHORIZED);
         }
-        userService.changePassword(userId, oldPassword, newPassword);
+        userService.changePassword(userId, request.getOldPassword(), request.getNewPassword());
         // 改密后立即吊销当前 token，强制重新登录
-        invalidateCurrentToken(request);
+        invalidateCurrentToken(httpRequest);
         return Result.success("密码修改成功");
     }
 
@@ -96,9 +86,10 @@ public class AuthController {
     @Operation(summary = "管理员重置用户密码")
     @RequireRole
     @PostMapping("/admin/reset-password/{userId}")
-    public Result<?> resetPassword(@PathVariable Long userId, @RequestBody Map<String, String> payload) {
-        String newPassword = payload.get("newPassword");
-        if (newPassword == null) return Result.error(400, "新密码不能为空");
+    public Result<?> resetPassword(@PathVariable Long userId, @RequestParam String newPassword) {
+        if (newPassword == null || newPassword.isBlank()) {
+            return Result.error(ErrorCode.BAD_REQUEST, "新密码不能为空");
+        }
         userService.resetPassword(userId, newPassword);
         return Result.success("重置成功");
     }

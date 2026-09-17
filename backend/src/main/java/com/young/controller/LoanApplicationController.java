@@ -3,6 +3,8 @@ package com.young.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.common.RequireRole;
 import com.young.common.Result;
 import com.young.pojo.LoanApplication;
@@ -36,8 +38,9 @@ public class LoanApplicationController {
     @Operation(summary = "查询待审批贷款列表（管理端）")
     @RequireRole
     @GetMapping("/pending")
-    public Result<?> listPending() {
-        return Result.success(loanService.getPendingList());
+    public Result<?> listPending(PageQuery pageQuery) {
+        pageQuery.normalize();
+        return Result.success(loanService.getPendingList(pageQuery));
     }
 
     /**
@@ -67,15 +70,17 @@ public class LoanApplicationController {
      */
     @Operation(summary = "查询贷款申请列表")
     @GetMapping("/list")
-    public Result<List<LoanApplication>> getList(
+    public Result<PageResult<LoanApplication>> getList(
             @RequestAttribute("userId") Long loggedUserId,
             @RequestAttribute("role") Integer role,
-            @RequestParam(required = false) Long userId) {
+            @RequestParam(required = false) Long userId,
+            PageQuery pageQuery) {
         if ((role == null || role != 1) && (userId == null || !userId.equals(loggedUserId))) {
             return Result.error(403, "越权访问：您无权查询其他用户的贷款申请列表");
         }
-        List<LoanApplication> list = loanService.getApplicationList(userId);
-        return Result.success(list);
+        pageQuery.normalize();
+        PageResult<LoanApplication> page = loanService.getApplicationList(userId, pageQuery);
+        return Result.success(page);
     }
 
     /**
@@ -83,8 +88,11 @@ public class LoanApplicationController {
      */
     @Operation(summary = "查询我的贷款申请列表")
     @GetMapping("/my")
-    public Result<List<LoanApplication>> getMyList(@RequestAttribute("userId") Long userId) {
-        List<LoanApplication> list = loanService.getApplicationList(userId);
-        return Result.success(list);
+    public Result<PageResult<LoanApplication>> getMyList(
+            @RequestAttribute("userId") Long userId,
+            PageQuery pageQuery) {
+        pageQuery.normalize();
+        PageResult<LoanApplication> page = loanService.getApplicationList(userId, pageQuery);
+        return Result.success(page);
     }
 }

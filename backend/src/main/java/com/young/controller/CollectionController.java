@@ -1,6 +1,8 @@
 package com.young.controller;
 
 import com.young.common.BusinessException;
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.common.RequireRole;
 import com.young.common.Result;
 import com.young.pojo.CollectionRecord;
@@ -27,13 +29,14 @@ public class CollectionController {
     private CollectionService collectionService;
 
     /**
-     * 获取当前所有逾期账单（用于管理员催收台展示）
+     * 获取当前所有逾期账单（用于管理员催收台展示，分页）
      */
     @Operation(summary = "查询全部逾期账单")
     @RequireRole
     @GetMapping("/overdue-plans")
-    public Result<List<RepaymentPlan>> getOverduePlans() {
-        return Result.success(collectionService.getOverduePlans());
+    public Result<PageResult<RepaymentPlan>> getOverduePlans(PageQuery pageQuery) {
+        pageQuery.normalize();
+        return Result.success(collectionService.getOverduePlans(pageQuery));
     }
 
     /**

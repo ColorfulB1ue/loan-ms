@@ -1,5 +1,7 @@
 package com.young.controller;
 
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.common.RequireRole;
 import com.young.common.Result;
 import com.young.pojo.RepaymentPlan;
@@ -24,23 +26,25 @@ public class FinanceController {
     private FinanceService financeService;
 
     /**
-     * [财务中心] 查询全平台所有还款计划（含客户姓名）
+     * [财务中心] 查询全平台所有还款计划（含客户姓名，分页）
      */
     @Operation(summary = "查询全平台还款计划")
     @RequireRole
     @GetMapping("/plans")
-    public Result<List<RepaymentPlan>> getAllPlans() {
-        return Result.success(financeService.getAllPlans());
+    public Result<PageResult<RepaymentPlan>> getAllPlans(PageQuery pageQuery) {
+        pageQuery.normalize();
+        return Result.success(financeService.getAllPlans(pageQuery));
     }
 
     /**
-     * [财务中心] 查询全平台所有历史入账明细
+     * [财务中心] 查询全平台所有历史入账明细（分页）
      */
     @Operation(summary = "查询全平台入账明细")
     @RequireRole
     @GetMapping("/records")
-    public Result<List<RepaymentRecord>> getAllRecords() {
-        return Result.success(financeService.getAllRecords());
+    public Result<PageResult<RepaymentRecord>> getAllRecords(PageQuery pageQuery) {
+        pageQuery.normalize();
+        return Result.success(financeService.getAllRecords(pageQuery));
     }
 
     /**

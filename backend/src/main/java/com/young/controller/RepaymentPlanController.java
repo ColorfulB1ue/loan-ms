@@ -3,6 +3,8 @@ package com.young.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import com.young.common.PageQuery;
+import com.young.common.PageResult;
 import com.young.common.Result;
 import com.young.pojo.RepaymentPlan;
 import com.young.service.RepaymentPlanService;
@@ -21,12 +23,27 @@ public class RepaymentPlanController {
     private RepaymentPlanService repaymentService;
 
     /**
-     * [客户端] 获取我的账单
+     * [客户端] 获取我的账单（分页）
      */
     @Operation(summary = "查询我的还款计划")
     @GetMapping("/my-plans")
-    public Result<List<RepaymentPlan>> getMyPlans(@RequestAttribute("userId") Long userId, 
-                                                  @RequestParam(required = false) Integer status) {
+    public Result<PageResult<RepaymentPlan>> getMyPlans(
+            @RequestAttribute("userId") Long userId,
+            @RequestParam(required = false) Integer status,
+            PageQuery pageQuery) {
+        pageQuery.normalize();
+        PageResult<RepaymentPlan> page = repaymentService.getUserPlans(userId, status, pageQuery);
+        return Result.success(page);
+    }
+
+    /**
+     * [客户端] 获取我的账单（不分页，用于内部逻辑）
+     */
+    @Operation(summary = "查询我的还款计划（全部）")
+    @GetMapping("/my-plans/all")
+    public Result<List<RepaymentPlan>> getMyPlansAll(
+            @RequestAttribute("userId") Long userId,
+            @RequestParam(required = false) Integer status) {
         List<RepaymentPlan> list = repaymentService.getUserPlans(userId, status);
         return Result.success(list);
     }
@@ -36,8 +53,8 @@ public class RepaymentPlanController {
      */
     @Operation(summary = "支付指定期还款账单")
     @PostMapping("/pay")
-    public Result<?> payInstallment(@RequestAttribute("userId") Long userId, 
-                                    @RequestParam Long planId, 
+    public Result<?> payInstallment(@RequestAttribute("userId") Long userId,
+                                    @RequestParam Long planId,
                                     @RequestParam BigDecimal payAmount) {
         repaymentService.payNormalInstallment(userId, planId, payAmount);
         return Result.success("账单支付成功");
@@ -48,7 +65,7 @@ public class RepaymentPlanController {
      */
     @Operation(summary = "提前结清整笔贷款")
     @PostMapping("/pay-early/{loanId}")
-    public Result<?> payEarlySettlement(@RequestAttribute("userId") Long userId, 
+    public Result<?> payEarlySettlement(@RequestAttribute("userId") Long userId,
                                         @PathVariable Long loanId) {
         repaymentService.payEarlySettlement(userId, loanId);
         return Result.success("该笔贷款已全部提前结清");
