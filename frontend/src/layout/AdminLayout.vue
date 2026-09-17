@@ -249,22 +249,15 @@ const handleLogout = async () => {
 }
 
 .menu-badge {
-  margin-left: auto;
-}
-
-.menu-badge :deep(.el-badge__content) {
-  font-size: 10px;
-  height: 16px;
-  line-height: 16px;
-  padding: 0 4px;
+  /* 由 layout.css 统一控制 */
 }
 
 .menu-badge.warning :deep(.el-badge__content) {
-  background-color: #e6a23c;
+  background-color: var(--color-warning, #e6a23c);
 }
 
 .menu-badge.danger :deep(.el-badge__content) {
-  background-color: #f56c6c;
+  background-color: var(--color-danger, #f56c6c);
 }
 
 .menu-title {

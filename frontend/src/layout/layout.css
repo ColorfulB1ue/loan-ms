@@ -64,6 +64,8 @@
   color: var(--text-secondary, #475569) !important;
   font-weight: 500;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
 }
 
 .el-menu-vertical :deep(.el-menu-item .el-icon) {
@@ -87,6 +89,17 @@
 
 .el-menu-vertical :deep(.el-menu-item:hover .el-icon) {
   color: var(--text-primary, #0f172a) !important;
+}
+
+/* 菜单内文字 */
+.el-menu-vertical :deep(.el-menu-item span) {
+  flex: 1;
+}
+
+/* 菜单内徽章 */
+.el-menu-vertical :deep(.el-menu-item .el-badge) {
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .content-area {
