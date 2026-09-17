@@ -17,7 +17,7 @@
 .logo {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--primary-color, #2563eb);
+  color: #2563eb;
   letter-spacing: -0.02em;
 }
 
@@ -62,7 +62,7 @@
 .el-menu-vertical :deep(.el-menu-item) {
   margin: 4px 12px;
   border-radius: 8px;
-  color: var(--text-secondary, #475569) !important;
+  color: #475569 !important;
   font-weight: 500;
   transition: all 0.2s ease;
   display: flex;
@@ -71,26 +71,36 @@
 }
 
 .el-menu-vertical :deep(.el-menu-item .el-icon) {
-  color: var(--text-secondary, #475569) !important;
+  color: #475569 !important;
 }
 
 .el-menu-vertical :deep(.el-menu-item.is-active) {
-  background: var(--primary-light, #dbeafe) !important;
+  background: #dbeafe !important;
   font-weight: 600 !important;
-  color: var(--primary-color, #2563eb) !important;
+  color: #2563eb !important;
 }
 
 .el-menu-vertical :deep(.el-menu-item.is-active .el-icon) {
-  color: var(--primary-color, #2563eb) !important;
+  color: #2563eb !important;
+}
+
+/* 选中项悬浮时保持选中样式 */
+.el-menu-vertical :deep(.el-menu-item.is-active:hover) {
+  background: #dbeafe !important;
+  color: #2563eb !important;
+}
+
+.el-menu-vertical :deep(.el-menu-item.is-active:hover .el-icon) {
+  color: #2563eb !important;
 }
 
 .el-menu-vertical :deep(.el-menu-item:hover) {
-  background: var(--bg-hover, #f1f5f9) !important;
-  color: var(--text-primary, #0f172a) !important;
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
 }
 
 .el-menu-vertical :deep(.el-menu-item:hover .el-icon) {
-  color: var(--text-primary, #0f172a) !important;
+  color: #0f172a !important;
 }
 
 /* 菜单内文字 */
@@ -130,10 +140,12 @@
   align-items: center;
   padding: 0 !important;
   margin: 4px 8px;
+  height: 40px;
 }
 
 .el-menu-vertical.is-collapse :deep(.el-menu-item .el-icon) {
-  margin: 0;
+  margin: 0 !important;
+  position: static;
 }
 
 .el-menu-vertical.is-collapse :deep(.el-menu-item span:not(.el-icon)),
