@@ -79,7 +79,7 @@
             <div class="field-tip">期限：{{ selectedProduct.minTerm }} ~ {{ selectedProduct.maxTerm }} 个月</div>
           </el-form-item>
           <el-form-item label="资金用途声明">
-            <el-input v-model="form.purpose" type="textarea" :rows="3" placeholder="例如：日常消费、工程周转" size="large"></el-input>
+            <el-input v-model="form.purpose" type="textarea" :rows="10" resize="none" placeholder="例如：日常消费、工程周转" size="large"></el-input>
           </el-form-item>
         </el-form>
       </div>

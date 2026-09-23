@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+/* 统一 Element Plus 组件圆角为 12px：覆盖 EP 默认 --el-border-radius-base(4px)。
+   用 !important 是因为 element-plus/dist/index.css 在 main.js 中于本文件之后引入，会覆盖普通定义。
+   影响按钮、卡片、输入框、标签、popover 等绝大多数组件的基础圆角。 */
+:root {
+  --el-border-radius-base: 12px !important;
+}
+
 /* ============================================
  * 亮色主题变量（默认）
  * 金融/银行产品配色：专业、可信赖、清晰
@@ -135,10 +142,20 @@ html.dark {
 .el-input__wrapper,
 .el-input__wrapper.is-focus,
 .el-input__wrapper:focus,
-.el-input__wrapper:focus-visible {
+.el-input__wrapper:focus-visible,
+/* 数字输入框：外层容器也需统一圆角，否则内外圆角不一致会覆盖四角 */
+.el-input-number {
   border-radius: var(--radius-xl, 12px) !important;
   --el-input-border-radius: 12px;
   border: none !important;
+}
+
+/* 数字输入框左右步进按钮：圆角跟随外层，避免方角覆盖输入框四角 */
+.el-input-number .el-input-number__decrease {
+  border-radius: var(--radius-xl, 12px) 0 0 var(--radius-xl, 12px) !important;
+}
+.el-input-number .el-input-number__increase {
+  border-radius: 0 var(--radius-xl, 12px) var(--radius-xl, 12px) 0 !important;
 }
 
 /* 移除所有输入框内部元素的 outline 和边框 */
@@ -150,7 +167,6 @@ html.dark {
 .el-input__inner:focus-visible {
   outline: none !important;
   border: none !important;
-  border-radius: inherit !important;
   box-shadow: none !important;
 }
 
