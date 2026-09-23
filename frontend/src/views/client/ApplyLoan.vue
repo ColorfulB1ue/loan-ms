@@ -6,8 +6,7 @@
         <p>您的全部贷款申请与审批记录</p>
       </div>
       <el-button type="primary" size="large" @click="openDialog" color="#2563eb"
-        style="color:#fff; display:inline-flex; align-items:center; gap:6px;">
-        <el-icon><Plus /></el-icon>
+        style="color:#fff; display:inline-flex; align-items:center; justify-content:center; line-height:1; gap:6px;">
         新增贷款申请
       </el-button>
     </div>
